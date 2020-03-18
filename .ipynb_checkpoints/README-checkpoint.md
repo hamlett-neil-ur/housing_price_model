@@ -25,7 +25,7 @@ The image below illustrates the concept for operations.  Property buyers on beha
 
 ### ***Figure 1*** — Concept of operations for spot-market pricing model in purchasing framework.
 
-<img height="300" width="600" src="./Graphics/20200116 CONOPS.svg.png" > 
+<img width="800" align="center" src="./Graphics/20200116 CONOPS.svg.png" > 
 </p>
 
 The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains between 80% and 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
@@ -43,7 +43,7 @@ Categoricals were judged influential using a reciprocal approach.  That is, mult
 
 ### ***Figure 2*** — Graphical representation of model performance..
 
-<img height="300" width="600" src="./Graphics/Resp_resid_train_test.png" > 
+<img width="800" align = "center" src="./Graphics/Resp_resid_train_test.png" > 
 </p>
 
 Applying all these explantories resulted in a model that was overfit and had a moderate degree of bias.  Attention was then paid to reducing the variables. This was primarily done through examining outliers.  Only two to four particularly egregious outliers were present in the data. For these, βᵢ×𝘹ᵢ coefficients-variable products were tabulated for each explanatory variable. These products were sorted in decreasing order.  Coefficients were removed if they contributed substantially to the inflation of the outliers' price estinates.

@@ -4,6 +4,8 @@
 
 
 </p>
+
+
 # Residential Real-Estate Spot-Market Pricing Model for Ames, IA.
 
 
@@ -41,7 +43,7 @@ Categoricals were judged influential using a reciprocal approach.  That is, mult
 
 ### ***Figure 2*** — Graphical representation of model performance..
 
-<img height="300" width="600" src="https://git.generalassemb.ly/hamlett-neil-ga/project_2/blob/master/Graphics/Resp_resid_train_test.png" > 
+<img height="300" width="600" src="./Graphics/Resp_resid_train_test.png" > 
 </p>
 
 Applying all these explantories resulted in a model that was overfit and had a moderate degree of bias.  Attention was then paid to reducing the variables. This was primarily done through examining outliers.  Only two to four particularly egregious outliers were present in the data. For these, βᵢ×𝘹ᵢ coefficients-variable products were tabulated for each explanatory variable. These products were sorted in decreasing order.  Coefficients were removed if they contributed substantially to the inflation of the outliers' price estinates.
@@ -58,18 +60,12 @@ The table below summarizes typical scores.  The SSE was egregiously outlier-domi
 
 
 
-<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+
 
 
 #### Data Dictionary
 
 The data dictionary is an operational component of the code. A template was produced using pandas.DataFrame methods.  The template was exported to a csv file.  This file was manually edited.  A "populated" data dictionary was read back into the python environment.  The contents of the "notes" and "disposition" columns were then used by the logic to handle and prepare the data for modeling.
-
-
-<p align="center">
-<img height="210" width="360" src="https://git.generalassemb.ly/hamlett-neil-ga/DCI-10-DC-Hamlett-Submissions/blob/master/project/project_2/Graphics/191106%20UR%20Biz%20Card.svg.png" > 
-
-</p>
 
 
 
@@ -156,5 +152,8 @@ The data dictionary is an operational component of the code. A template was prod
 |YearBuilt    |            2051|int64  |            113|Original construction date. Numeric measurement at integer precision.                                                                             |Use as provided                                                |Continuous |
 |YearRemodAdd |            2051|int64  |             61|Remodel date (same as construction date if no remodeling or additions).  Numeric measurement at integer precision.                                |Use as provided                                                |Continuous |
 
+<p align="center">
+<img height="75" align = "center" src="./Graphics/191106%20UR%20Biz%20Card.svg.png" > 
 
+</p>
 ___

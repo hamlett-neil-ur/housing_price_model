@@ -1,0 +1,83 @@
+attribute,non_null_records,type,distinct_values,Notes,Disposition
+1stFlrSF,2051,int64,915,First Floor square feet. Numeric at integer precision.,Discard attribute.
+2ndFlrSF,2051,int64,504,Second floor square feet. Numeric at integer precision.,
+3SsnPorch,2051,int64,22,Three season porch area in square feet. Numeric.,
+Alley,2051,object,3,Alley access to property.  String-categorical.  Category “NA” misinterpreted as Null.,
+BedroomAbvGr,2051,int64,8,Bedrooms above grade (does NOT include basement bedrooms). Discrete numeric.,
+BldgType,2051,object,5,Type of dwelling. Categorical string.,
+BsmtCond,2050,object,7,Evaluates the general condition of the basement. String categorical. NA (⇒ “No Basement”) misinterpreted as NULL; empty values also present.,Assign null values to “NA”
+BsmtExposure,2047,object,6,Refers to walkout or garden level walls. String categorical. NA (⇒ “No Basement”) misinterpreted as NULL; empty values also present.,Assign null values to “NA”
+BsmtFullBath,2049,float64,6,Basement full bathrooms. Discrete numeric count. Missing values ≟ 0.,Assign null values to 0
+BsmtHalfBath,2049,float64,5,Basement half bathrooms. Discrete numeric count.  Missing values ≟ 0.,Assign null values to 0
+BsmtQual,2050,object,7, Evaluates the height of the basement. String categorical. NA (⇒ “No Basement”) misinterpreted as NULL; empty values also present.,Assign null values to “NA”
+BsmtUnfSF,2050,float64,968,Unfinished square feet of basement area. Numeric.,Assign null values to 0
+BsmtFinSF1,2050,float64,822,Type 1 finished square feet. Numeric.,Assign null values to 0
+BsmtFinSF2,2050,float64,206,Type 2 finished square feet. Numeric.,Assign null values to 0
+BsmtFinType1,2050,object,8,Rating of basement finished area. String categorical.  NA (⇒ “No Basement”) misinterpreted as NULL; empty values also present.,Assign null values to “NA”
+BsmtFinType2,2049,object,8,Rating of basement finished area (if multiple types). String categorical.  NA (⇒ “No Basement”) misinterpreted as NULL; empty values also present.,Assign null values to “NA”
+CentralAir,2051,object,2,Central air conditioning. String binary categorical.,
+Condition1,2051,object,9,"Proximity to various conditions, transportation services, in particular. Nine categorical strings.",
+Condition2,2051,object,8,Proximity to various conditions (if more than one is present). Eight categorical strings.,
+Selldate,2051,Integer,55,"Date of sale.  Concatenation of Yr_sold, Mo_Sold.",
+Electrical,2051,object,5,Electrical system. String categorical.,
+EnclosedPorch,2051,int64,159,Enclosed porch area in square feet. Numeric.,
+ExterCond,2051,object,5,Evaluates the present condition of the material on the exterior. String categorical.,
+ExterQual,2051,object,4,Evaluates the quality of the material on the exterior. String categorical.,
+Exterior1st,2051,object,15,Exterior covering on house. String Categorical.,
+Exterior2nd,2051,object,15,Exterior covering on house (if more than one material). String Categorical.,
+Fence,2051,object,5,Fence quality. String categorical. NA (⇒ “No Fence”) misinterpreted as NULL. ,
+FireplaceQu,2051,object,6,Fireplace quality. String categorical.  NA (⇒ “No Fireplace”) misinterpreted as NULL. ,
+Fireplaces,2051,int64,5,Number of fireplace. Discrete numeric count.,
+Foundation,2051,object,6,Type of foundation. String categorical.,
+FullBath,2051,int64,5,Full bathrooms above grade. Discrete numeric count.,
+Functional,2051,object,8,Home functionality (Assume typical unless deductions are warranted). String categorical.,
+GarageArea,2050,float64,515,Size of garage in square feet. Continuous numeric at integer precision. Empty for Garage_Type = “NA”.,Assign null values to 0
+GarageCars,2050,float64,7,Size of garage in car capacity. Discrete numeric count. Missing values ≟ 0.,
+GarageCond,2050,object,7,Garage condition. String categorical.  NA (⇒ “No Garage”) misinterpreted as NULL; Missing value for non-NA garage. ,Discard records:  null-valued  for non-NA garage
+GarageFinish,2050,object,5,Interior finish of the garage. String categorical.  NA (⇒ “No Garage”) misinterpreted as NULL.  ,
+GarageQual,2050,object,7,Garage quality. String categorical.    NA (⇒ “No Garage”) misinterpreted as NULL; Missing value for non-NA garage.,Discard records:  null-valued records for non-NA garage
+GarageType,2051,object,7,Garage location. String categorical.   NA (⇒ “No Garage”) misinterpreted as NULL. ,
+GarageYrBlt,1937,float64,214,Year garage was built. Numeric at discrete-year resolution. Empty for Garage_Type = “NA”.,Discard attribute. Highly correlated with Year_built attribute.
+GrLivAreaLarge,,object,2,Binary flag for large properties.  Derived from GrLivArea.  Applies when GrLivArea ≥ 3000.  Categorical,
+GrLivArea,2051,int64,1053,Above grade (ground) living area square feet. Numeric at integer precision.,
+HalfBath,2051,int64,3,Half baths above grade. Discrete numeric count.,
+Heating,2051,object,5,Type of heating. String categorical.,
+HeatingQC,2051,object,5,Type of heating. String categorical.,
+HouseStyle,2051,object,8,Style of dwelling. Categorical string,
+Id,2051,int64,2051,Unique ID. Integer,
+KitchenAbvGr,2051,int64,4,Kitchens above grade. Discrete numeric count.,
+KitchenQual,2051,object,4,Kitchen quality. String categorical.,
+LandContour,2051,object,4,Flatness of the property. Four string Categorical,
+LandSlope,2051,object,3,Slope of property. Three categorical strings.,
+LotArea,2051,int64,1476,Lot size in square feet. Numeric continuous at integer precision.,
+LotConfig,2051,object,5,Lot configuration. Five string categorical.,
+LotFrontage,1721,float64,448,Linear feet of street connected to property. Numeric continuous No obvious relationship to other attributes.,Discard attribute.
+LotShape,2051,object,4,General shape of property. Four string Categorical.,
+LowQualFinSF,2051,int64,31,Low quality finished square feet (all floors). Numeric at integer precision.,
+MasVnrArea,2029,float64,395,Masonry veneer area in square feet.  Some empty values. Numeric continuous.  Empty ≟ 0.,Discard records:  null-valued records.
+MasVnrType,2029,object,5,Masonry veneer type. Five categorical values. Some empty values.  Empty ≟ “None”,Discard records:  null-valued records.
+MiscFeature,2051,object,6,Miscellaneous feature not covered in other categories. String categorical.  NA (⇒ “None”) misinterpreted as NULL. ,
+MiscVal,2051,int64,28,Value of miscellaneous feature. Numeric.,
+MSSubClass,2051,int64,16,"Identifies the type of dwelling involved in the sale. Numeric categorical (non-ordinal). Sixteen categories, all of which represented in data.",
+MSZoning,2051,object,7,Identifies the general zoning classification of the sale. String categorical. Seven of eight possible values represented.,
+Neighborhood,2051,object,28,Physical locations within Ames city limits. 28 categorical strings.,
+OpenPorchSF,2051,int64,223,Open porch area in square feet. Numeric.,
+OverallCond,2051,int64,9,Rates the overall condition of the house. Discrete.,
+OverallQual,2051,int64,10,Rates the overall material and finish of the house. Discrete.,
+PavedDrive,2051,object,3,Paved driveway. String categorical.,
+PID,2051,int64,2051,Unique ID. Integer. ,Discard attribute.
+PoolArea,2051,int64,10,Pool area in square feet. Numeric.,
+PoolQC,2051,object,5,Pool quality. String categorical.   NA (⇒ “No Pool”) misinterpreted as NULL; Missing value for non-NA garage. ,
+RoofMatl,2051,object,6,Roof material. String Categorical.,
+RoofStyle,2051,object,6,Type of roof. String Categorical.,
+SalePrice,2051,object,9,Type of sale. Target Variable.,
+Sell_date,,,,,Discard attribute.
+SaleType,2051,int64,828,Type of sale. String Categorical.,
+ScreenPorch,2051,int64,100,Screen porch area in square feet. Numeric.,
+Street,2051,object,2,Type of road access to property. Two-string categorical,
+TotalBsmtSF,2050,float64,893,Total square feet of basement area. Numeric,
+TotRmsAbvGrd,2051,int64,14,Total rooms above grade (does not include bathrooms). Discrete numeric count.,
+Utilities,2051,object,3,"Type of utilities available. Four string categorical, of which three are present. No 'ELO' isntances",
+WoodDeckSF,2051,int64,322,Wood deck area in square feet. Numeric.,
+YearBuilt,2051,int64,113,Original construction date. Numeric measurement at integer precision.,
+YearRemodAdd,2051,int64,61,Remodel date (same as construction date if no remodeling or additions).  Numeric measurement at integer precision.,

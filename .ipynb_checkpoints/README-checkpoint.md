@@ -9,7 +9,7 @@
 # Residential Real-Estate Spot-Market Pricing Model for Ames, IA.
 
 
-## Client:  SlumRock Partners, LLP.
+## Client:  SlumRock Partners, LLP (fictitious client).
 ### Deliverable: Friday, January 17, 2020 Interim Review
 
 ## Executive Summary.
@@ -153,7 +153,7 @@ The data dictionary is an operational component of the code. A template was prod
 |YearRemodAdd |            2051|int64  |             61|Remodel date (same as construction date if no remodeling or additions).  Numeric measurement at integer precision.                                |Use as provided                                                |Continuous |
 
 <p align="center">
-<img height="75" align = "center" src="./Graphics/191106%20UR%20Biz%20Card.svg.png" > 
+<img height="210" align = "center" src="./Graphics/191106%20UR%20Biz%20Card.svg.png" > 
 
 </p>
 ___

@@ -9,61 +9,58 @@
 # Residential Real-Estate Spot-Market Pricing Model for Ames, IA.
 
 
-## Client:  SlumRock Partners, LLP (fictitious client).
 ### Deliverable: Friday, January 17, 2020 Interim Review
 
 ## Executive Summary.
 Uncertainty research provides a preliminary capability to identify below-market opportunities. These assets can be acquired quickly on the spot market. A predictive model employs $N$ features to estimate should-cost priceses. 
 
-SlumRock initiated a fund to follow other hedge funds in to the residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
+A hypothetical Real-Estate Investment Trust (REIT) initiated a fund to follow other hedge funds in to the residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
 
 Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing single-family homes.  First, the funds buy their properties with cash.  This gives them advantages over housholdes dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
 
 The image below illustrates the concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
-<p align="center">
-
-### ***Figure 1*** — Concept of operations for spot-market pricing model in purchasing framework.
-
-<img width="800" align="center" src="./Graphics/20200116 CONOPS.svg.png" > 
-</p>
-
 The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains between 80% and 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
 
-## Technical Elaboration.
-
-After trying a variety of approaches, a Ridge-regression linear-regression model was selected. The model employs 216 explanatory variables. The variables are standardized and polynomial features were generaated for many of the five discrete-numeric and seven continuous-numeric variables.  These are derived from 80 avaialble explanatories from the data dictionary.
 
 
-An iterative feature-selection approach was selected.  The most-influential variables were first selected.  Numerical explanatory variables were judged to be influential if their correlation with the response variable exceeded a certain threshold, of about 45%.
+## Technical Approach.
 
-Categoricals were judged influential using a reciprocal approach.  That is, multinomial-logistic regression models were constructed for each such explanatory.  Each model used sales price, the overall model's response variable as its sole explanatory variable.  If the accuracy score of the resulting model exceed a threshold of 55%, it was deemed influential.  Figure 2 contains residual and response plots for the training and test data segments.
+<img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
-<p align="center">
+[Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  Figure 1 provides an overview.  This method has provided the foundations for delivery methods used by many leading technology firms, including IBM.  
 
-### ***Figure 2*** — Graphical representation of model performance..
+UR employs CRISP–DM because it contains more-direct coupling to the business context than some more data-centric methods.  It also provides more-explicit guidance on iterativity, an inescapable part of modeling.  The following subsections summarize its employment in this project.
 
-<img width="800" align = "center" src="./Graphics/Resp_resid_train_test.png" > 
-</p>
+### Business Understanding
 
-Applying all these explantories resulted in a model that was overfit and had a moderate degree of bias.  Attention was then paid to reducing the variables. This was primarily done through examining outliers.  Only two to four particularly egregious outliers were present in the data. For these, βᵢ×𝘹ᵢ coefficients-variable products were tabulated for each explanatory variable. These products were sorted in decreasing order.  Coefficients were removed if they contributed substantially to the inflation of the outliers' price estinates.
 
-In the end, the outliers' estiamtes are dominated by living space, 𝘧𝘵².  The outliers are large-footprint properties in neighborhoods for which the price per square foot is below average for the markert.  This scenario defies the limits of linear modeling.
+<img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
 
-The table below summarizes typical scores.  The SSE was egregiously outlier-dominated. 
 
-||Training|Test|
-|---|----|---|
-|<img src="https://render.githubusercontent.com/render/math?math=R^2">|0.89|0.81|
-|<img src="https://render.githubusercontent.com/render/math?math=\sqrt{SSE}">|<img src="https://render.githubusercontent.com/render/math?math=1.06\times10^6">|<img src="https://render.githubusercontent.com/render/math?math=6.8\times10^5">|
+### Data Understanding, Perparation.
+
+
+
+### Modeling.
+
+
+<img width="600" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
 
 
 
 
 
+### Model Evaluation.
 
 
-#### Data Dictionary
+<img width="800" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
+
+
+
+
+
+## Appendix — Data Dictionary.
 
 The data dictionary is an operational component of the code. A template was produced using pandas.DataFrame methods.  The template was exported to a csv file.  This file was manually edited.  A "populated" data dictionary was read back into the python environment.  The contents of the "notes" and "disposition" columns were then used by the logic to handle and prepare the data for modeling.
 

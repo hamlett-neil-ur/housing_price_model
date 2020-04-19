@@ -20,13 +20,20 @@ Two aspects of investors' operating model tend to deliver higher profitability t
 
 The image below illustrates the concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
+<p align="center">
+
+### ***Figure 1*** — Concept of operations for spot-market pricing model in purchasing framework.
+
+<img width="800" align="center" src="./Graphics/20200116 CONOPS.svg.png" > 
+</p>
+
 The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains between 80% and 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
 
 
 
 ## Technical Approach.
 
-<img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
+<img width="600" align = "left" src="./Graphics/191227 CRISP-DM.svg.png" >
 
 [Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  Figure 1 provides an overview.  This method has provided the foundations for delivery methods used by many leading technology firms, including IBM.  
 
@@ -34,33 +41,42 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 
 ### Business Understanding
 
+<img width="600" align = "right" src="./graphics/200407 Processing Stream Tech Composition.svg.png" >
 
-<img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
 
 
 ### Data Understanding, Perparation.
 
 
+An iterative feature-selection approach was selected.  The most-influential variables were first selected.  Numerical explanatory variables were judged to be influential if their correlation with the response variable exceeded a certain threshold, of about 45%.
 
-### Modeling.
+Categoricals were judged influential using a reciprocal approach.  That is, multinomial-logistic regression models were constructed for each such explanatory.  Each model used sales price, the overall model's response variable as its sole explanatory variable.  If the accuracy score of the resulting model exceed a threshold of 55%, it was deemed influential.  Figure 2 contains residual and response plots for the training and test data segments.
+
+<p align="center">
+
+### ***Figure 2*** — Graphical representation of model performance..
+
+<img width="800" align = "center" src="./Graphics/Resp_resid_train_test.png" > 
+</p>
+
+Applying all these explantories resulted in a model that was overfit and had a moderate degree of bias.  Attention was then paid to reducing the variables. This was primarily done through examining outliers.  Only two to four particularly egregious outliers were present in the data. For these, βᵢ×𝘹ᵢ coefficients-variable products were tabulated for each explanatory variable. These products were sorted in decreasing order.  Coefficients were removed if they contributed substantially to the inflation of the outliers' price estinates.
+
+In the end, the outliers' estiamtes are dominated by living space, 𝘧𝘵².  The outliers are large-footprint properties in neighborhoods for which the price per square foot is below average for the markert.  This scenario defies the limits of linear modeling.
+
+The table below summarizes typical scores.  The SSE was egregiously outlier-dominated. 
+
+||Training|Test|
+|---|----|---|
+|<img src="https://render.githubusercontent.com/render/math?math=R^2">|0.89|0.81|
+|<img src="https://render.githubusercontent.com/render/math?math=\sqrt{SSE}">|<img src="https://render.githubusercontent.com/render/math?math=1.06\times10^6">|<img src="https://render.githubusercontent.com/render/math?math=6.8\times10^5">|
 
 
-<img width="600" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
 
 
 
 
 
-### Model Evaluation.
-
-
-<img width="800" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
-
-
-
-
-
-## Appendix — Data Dictionary.
+### Appendix — Data Dictionary.
 
 The data dictionary is an operational component of the code. A template was produced using pandas.DataFrame methods.  The template was exported to a csv file.  This file was manually edited.  A "populated" data dictionary was read back into the python environment.  The contents of the "notes" and "disposition" columns were then used by the logic to handle and prepare the data for modeling.
 

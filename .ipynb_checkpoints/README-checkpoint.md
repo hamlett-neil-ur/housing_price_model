@@ -55,7 +55,7 @@ The table below summarizes typical scores.  The SSE was egregiously outlier-domi
 ||Training|Test|
 |---|----|---|
 |<img src="https://render.githubusercontent.com/render/math?math=R^2">|0.89|0.81|
-|<img src="https://render.githubusercontent.com/render/math?math=\sqrt{}SSE">|<img src="https://render.githubusercontent.com/render/math?math=1.06\times10^6">|<img src="https://render.githubusercontent.com/render/math?math=6.8\times10^5">|
+|<img src="https://render.githubusercontent.com/render/math?math=\sqrt{SSE}">|<img src="https://render.githubusercontent.com/render/math?math=1.06\times10^6">|<img src="https://render.githubusercontent.com/render/math?math=6.8\times10^5">|
 
 
 
@@ -152,8 +152,5 @@ The data dictionary is an operational component of the code. A template was prod
 |YearBuilt    |            2051|int64  |            113|Original construction date. Numeric measurement at integer precision.                                                                             |Use as provided                                                |Continuous |
 |YearRemodAdd |            2051|int64  |             61|Remodel date (same as construction date if no remodeling or additions).  Numeric measurement at integer precision.                                |Use as provided                                                |Continuous |
 
-<p align="center">
-<img height="210" align = "center" src="./Graphics/191106%20UR%20Biz%20Card.svg.png" > 
 
-</p>
 ___

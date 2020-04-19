@@ -54,7 +54,7 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 ### Model Evaluation.
 
 
-<img width="800" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
+<img width="1000" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
 
 
 

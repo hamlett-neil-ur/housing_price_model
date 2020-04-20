@@ -98,7 +98,15 @@ The kernel methods — to which the kNN regressor belongs — fit less-well into
 
 #### Approaches based on recursive binary partitions.
 
-*Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.
+<img width="450" align="left" src="./Graphics/Tree Example.png" > 
+
+*Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.  Alternatively, tree-based methods divide the data using *recursive binary partitioning* ([[Brieman, *et al*, 1984]](https://amzn.to/3ankMSn) [[Hastie, *et al*, 2009, §9.2]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)). 
+
+In a regression context — our case of interest — this produces approximations that are piecewise constant.  The partitining is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error.
+
+Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
+
+*Random Forests* extend this smoothing through also randomly selecting from among the feature set  [Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). 
 
 
 

@@ -35,13 +35,17 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 
 <img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
 
-The figure to the right summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
+The figure to the left summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
 
 Here,  we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would provide real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/) and possible [Zillow](https://www.zillow.com/).  
 
 The work summarized here represents the first step in the `Spot-market pricing model` component of the workflow. We establish here the ability to estimate the *should-cost* price of a home.  We focus at this stage on point estimates.  We extend this in subseqent work to a distribution of expected prices. This allows us to specify a below-market-price threshold, at which the REIT might elect to buy.
 
 The `total ownership-cost model` is a [net-present-value](https://www.investopedia.com/terms/n/npv.asp) (NPV) model of all costs except for the acquisition costs. This is based on a [discounted cash-flow](https://www.investopedia.com/terms/d/dcf.asp) (DCF) analysis of ownership costs such as taxes, maintenance, and insurance.  DCF is a foundational practice in financial accounting (e.g., [[Pratt, 2016]](https://amzn.to/2KkjH3c), [[Libby, *et al*, 2019]](https://amzn.to/2VpcqFD), [[Brealey, *et al*, 2020]](https://amzn.to/3ew0wkV)).  
+
+Finally, an automated decision-making framework would provide REIT asset-portfolio managers with recommendations regarding whether to attempt a purchase of the property. The decision model follows principles from the decision sciences (e.g., [[Kochenderfer, 2015]](https://amzn.to/34RA5BR), [[Skalna, *et al*, 2015]](https://www.springer.com/us/book/9783319264929), [[Howard, 2015]](https://amzn.to/2XS2aYi)).  
+
+For each of the foregoing stages in the purchasing-decision process, we develop distributions of the factors influencing our decision.  These are inferred from the data and fit to a distribution (e.g., [[Keelin, 2016]](https://pubsonline.informs.org/doi/10.1287/deca.2016.0338)).  In sume cases they might be elicited from experts through a process resembling that described by Spetzler [[Spetzler, 1975]](https://pubsonline.informs.org/doi/abs/10.1287/mnsc.22.3.340).
 
 
 ### Data Understanding, Perparation.

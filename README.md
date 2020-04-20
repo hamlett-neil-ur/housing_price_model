@@ -50,6 +50,9 @@ For each of the foregoing stages in the purchasing-decision process, we develop 
 
 ### Data Understanding, Perparation.
 
+<img width="750" align="right" src="./Graphics/DataDictSummy.png" > 
+
+Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure to the right depicts summary statistics from the data
 
 
 ### Modeling.

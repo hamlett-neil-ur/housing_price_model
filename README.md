@@ -50,9 +50,21 @@ For each of the foregoing stages in the purchasing-decision process, we develop 
 
 ### Data Understanding, Perparation.
 
-Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure below depicts summary statistics from the data dictionary, included as an appendix to the end of this report.  We begin with a flat table containing 2,051 records with 83 attributes each.
+Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure below depicts summary statistics from the data dictionary, included as an appendix to the end of this report.  We begin with a flat table containing 2,051 records with 83 attributes each. 
 
-<img width="1000" align="right" src="./Graphics/DataDictSummy.png" > 
+<img width="1000" align="center" src="./Graphics/DataDictSummy.png" > 
+
+
+<img width="250" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
+
+
+Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We se a small nuber of of records for which many features are missing.  We also see some attributes for which most records lack values.  Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. 
+
+The analysis also shows the different attribute categories that appear in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes.  One of the continuous variables `SalesPrice` is our target variable.
+
+This amount of attributes is considerable.  We at risk from the *curse of dimensionality* [[Hastie, *et al*, 2009, §2.5]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This becomes particularly acute considering our the number of categorical attributes.  When we *dummify* — e.g., [[pandas.get_dummies()]](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html) — the data, the attribute dimensionality could be multiples greater.  
+
+Paring the attribute space provides our response, here. We pair-wise analyze each explanatory variable's relationship with the target variable `SalesPrice`.  This is accomplished via two methods. We consider the pair-wise correlations for continuous and discrete variables. The heatmap column to the right illustrates.  We retain continuous and discrete explanatory variables whose correlation with the response variable exceeds 0.45.  This gives us six continous and five discrete variables.
 
 
 

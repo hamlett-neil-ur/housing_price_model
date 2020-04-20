@@ -140,11 +140,30 @@ The table below contains summary statistics for the best model from each approac
 
 Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
 
-We highlight the tree-based methods.  These achieved the best performance on the test data.  In particular, the *bagging-tree regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.876.  
+We highlight the tree-based methods.  These achieved the best performance on the test data.  In particular, the *bagging-tree regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.876 against the training data.
 
 
 <img width="1000" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
 
+Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  These resutls are less-strong.
+
+#### What do we believe is happening? 
+
+<img width="750" align="left" src="./Graphics/Bagg-Tree Resp Resid Plots.png" > 
+
+The figures to the left contain the residual and response plots for test and training estimates produced by the bagging-tree regressor. [[Olive, 2017]](https://www.springer.com/us/book/9783319552507) recommends this visualization.  The plots also contain [Locally-Weighted Scatterplot Smoothing](https://www.epa.gov/sites/production/files/2016-07/documents/loess-lowess.pdf) (LOWESS) curves, also recommended in [[Olive, 2017]](https://www.springer.com/us/book/9783319552507).
+
+First, the LOWESS curves do not perfectly coincide with the red-colored <img src="https://render.githubusercontent.com/render/math?math=y_i=\hat{y_i}"> or the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curves. This tells us that the model fails to capture some of the structure in the data. 
+
+Specifically, our model overestimates the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
+
+<img width="750" align="left" src="./Graphics/Resp_resid_train_test.png" > 
+
+Second, the some outliers are occurring.  These are evident when for example <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve. These instances appear likely to drive our coefficient of determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores. 
+
+Now, our second set of response and residual plots represent results for the linear-regression model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
+
+Our tree-based models do perform marginally better.  The distincts are not dramatic. This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better.
 
 
 

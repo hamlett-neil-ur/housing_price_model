@@ -57,7 +57,6 @@ Our prototypical data set comes from a [well-known kaggle challenge](https://www
 
 <img width="350" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
 
-
 Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We se a small nuber of of records for which many features are missing.  We also see some attributes for which most records lack values.  Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. 
 
 The analysis also shows the different attribute categories that appear in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes.  One of the continuous variables `SalesPrice` is our target variable.
@@ -66,7 +65,14 @@ This amount of attributes is considerable.  We at risk from the *curse of dimens
 
 Paring the attribute space provides our response, here. We pair-wise analyze each explanatory variable's relationship with the target variable `SalesPrice`.  This is accomplished via two methods. We consider the pair-wise correlations for continuous and discrete variables. The heatmap column to the right illustrates.  We retain continuous and discrete explanatory variables whose correlation with the response variable exceeds 0.45.  This gives us six continous and five discrete variables.
 
-Our degree-of-influence analysis for categorical variables is somewhat less-direct. We assume that if a categorical variable is a good predictor of a continuous response variable, then the converse should also be true.  So, we construct univariate multinomial logistic-regression models for each categorical variable. We use our `SalesPrice` response variable as the explanatory variable for each such model. We retain categorical variables for which `SalesPrice` predicts their class with accuracy exceeding 0.55. This leaves us with 33 influential categorical variables. 
+Our degree-of-influence analysis for categorical variables is somewhat less-direct. We assume that if a categorical variable is a good predictor of a continuous response variable, then the converse should also be true.  So, we construct univariate multinomial logistic-regression models for each categorical variable. We use our `SalesPrice` response variable as the explanatory variable for each such model. We retain categorical variables for which `SalesPrice` predicts their class with accuracy exceeding 0.55. This leaves us with 33 influential categorical variables. After dummifying, we end up with 177 explanatory variables.
+
+Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This  is always advised for multiple reasons.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of multicollinearity.  In general, knowing exactly how many explanatory-variable dimensions are actually influential can be useful.
+
+<img width="600" align="right" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
+
+The figure to the right depicts results from dimensionality analysis of our 177 explanatory variables. 
+
 
 
 

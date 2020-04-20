@@ -84,10 +84,21 @@ We consider a diverse variety of models. The figure to the right extends an impo
 
 For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
 
-The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. 
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. 
 
+ 
 
-<img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">
+#### Approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.
+
+This work attempts to span the families in this table.  We however consider slightly different groupings.  The first group consists of methods that linearly transform explanatory-variable observations according to an operation resembling <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.  This class includes regression modeling, support-vector machines, artificial neural networks (ANNs), and kernel methods. 
+
+The first two explicitly use <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations in their formulations. ANNs use cascaded <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0\big)"> operations of our linear transform.  The 𝜙 functions are rectifier linear unit (RELU) operators. 
+
+The kernel methods — to which the kNN regressor belongs — fit less-well into this grouping.  They employ transforms of the form <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i\big)">.  The transform vector 𝝱 however is not uniform across all observations.  The kernel methods *scan* over the explanatory-variable space in a method resembling filtering and pooling in convolutional neural networks [[Haykin, 2009, §4.17]](https://amzn.to/3cvvO9J).
+
+#### Approaches based on recursive binary partitions.
+
+*Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.
 
 
 

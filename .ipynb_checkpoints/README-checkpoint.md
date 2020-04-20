@@ -55,7 +55,7 @@ Our prototypical data set comes from a [well-known kaggle challenge](https://www
 <img width="1000" align="center" src="./Graphics/DataDictSummy.png" > 
 
 
-<img width="250" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
+<img width="350" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
 
 
 Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We se a small nuber of of records for which many features are missing.  We also see some attributes for which most records lack values.  Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. 

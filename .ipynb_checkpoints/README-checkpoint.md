@@ -9,8 +9,6 @@
 # Residential Real-Estate Spot-Market Pricing Model for Ames, IA.
 
 
-### Deliverable: Friday, January 17, 2020 Interim Review
-
 ## Executive Summary.
 Uncertainty research provides a preliminary capability to identify below-market opportunities. These assets can be acquired quickly on the spot market. A predictive model employs $N$ features to estimate should-cost priceses. 
 
@@ -20,7 +18,7 @@ Two aspects of investors' operating model tend to deliver higher profitability t
 
 The image below illustrates the concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
-The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains between 80% and 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
+The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains approximately 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
 
 
 
@@ -36,6 +34,14 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 
 
 <img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
+
+The figure to the right summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
+
+Here,  we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would provide real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/) and possible [Zillow](https://www.zillow.com/).  
+
+The work summarized here represents the first step in the `Spot-market pricing model` component of the workflow. We establish here the ability to estimate the *should-cost* price of a home.  We focus at this stage on point estimates.  We extend this in subseqent work to a distribution of expected prices. This allows us to specify a below-market-price threshold, at which the REIT might elect to buy.
+
+The `total ownership-cost model` is a [net-present-value](https://www.investopedia.com/terms/n/npv.asp) (NPV) model of all costs except for the acquisition costs. This is based on a [discounted cash-flow](https://www.investopedia.com/terms/d/dcf.asp) (DCF) analysis of ownership costs such as taxes, maintenance, and insurance.  DCF is a foundational practice in financial accounting (e.g., [[Pratt, 2016]](https://amzn.to/2KkjH3c), [[Libby, *et al*, 2019]](https://amzn.to/2VpcqFD), [[Brealey, *et al*, 2020]](https://amzn.to/3ew0wkV)).  
 
 
 ### Data Understanding, Perparation.

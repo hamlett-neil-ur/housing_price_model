@@ -84,9 +84,7 @@ We consider a diverse variety of models. The figure to the right extends an impo
 
 For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
 
-The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. 
-
- 
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Modeling activities here emphasize predictive power, resistence to overfitting, and conditional probability. 
 
 #### Approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.
 
@@ -106,9 +104,25 @@ In a regression context — our case of interest — this produces approximation
 
 Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
 
-*Random Forests* extend this smoothing through also randomly selecting from among the feature set  [[Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). 
+*Random Forests* extend this smoothing through also randomly selecting from among the feature set [[Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). Instead of simply bootstrapping our observation set, we also randomly select the features on which partitioning decisions are based. 
 
+*Boosted Trees* "combines the outputs of many 'weak' estimators to produce a powerful 'committee'" [[Hastie, *et al*, 2009, chap 10]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). We "repeatedly grow shallow trees to the residuals, and hence build up an additive model consisting of the sum of trees" [[Efron, 2016, Chap 17]](https://amzn.to/2KmccsA).  At each stage, weights are applied to each of the training observations.  These weights apply emphasis to the observations for which the greatest error in the previous iterations occured. 
 
+#### Why the distinction between  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models and recursive binary partition?
+
+<img width="450" align="right" src="./Graphics/Bayes-net illustration.png" > 
+
+Recursive binary partitioning is paradigmatically distinct from  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> modeling in an important aspect. Specifically, they provide a distinct approach to handling of conditional probability.  Conditional probability is a key emphasis of *Probabilistic Graphical Models* (PGMs) (e.g,  [[Pearl, 1988]](https://amzn.to/2VISAnH)   [[Studený, 2005]](https://www.springer.com/us/book/9781852338916) [[Koller, 2009]](https://amzn.to/3aom53p)). The illustration to the right comes from [[Darwiche, 2009, Fig 4.2]](https://amzn.to/3amjVBy).
+
+Tree methods address conditional probability obliquely.  The binary cursive partitioning breaks observations into groups that are conspicuously distinct based on explanatory-variable values. This often proves a powerful approach to phenomenological heterogeneity.  
+
+Alternatively, approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> implicitly assume substantial homogeniety.  Response variables are related to numeric explanatory variables by the same set of slopes in the coefficient vector 𝝱. Distinct categories are handled by translating the intercept.  
+
+Consider for example the instance in which an observation belongs to the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category.  The indicator-function value for that attribute takes unity.  The effective slope — all other variables being equal — becomes <img src="https://render.githubusercontent.com/render/math?math=\beta_0%2B\beta_\nu">, and our estimate <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0%2B\beta_\nu">.
+
+*Why might this be problematic?*  Association with the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category might mean that we should have a coefficient vector different from 𝝱. Our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based methods only however admit to possibility of a single coefficient vector for all observations.
+
+Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}">
 
 
 ### Model Evaluation.

@@ -76,15 +76,15 @@ The figure to the left depicts results from dimensionality analysis of our 177 e
 
 We find that our 177 explanatory variables are highly dimensionally-domnated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.
 
-
-
 ### Modeling.
 
-<img width="750" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
+<img width="650" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
 
-We consider a diverse variety of models. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of the method
+We consider a diverse variety of models. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of each family of methods.  
 
-The rows in the table 
+For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
+
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. 
 
 
 <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">

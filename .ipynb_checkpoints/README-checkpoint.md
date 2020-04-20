@@ -106,7 +106,7 @@ In a regression context — our case of interest — this produces approximation
 
 Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
 
-*Random Forests* extend this smoothing through also randomly selecting from among the feature set  [Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). 
+*Random Forests* extend this smoothing through also randomly selecting from among the feature set  [[Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). 
 
 
 

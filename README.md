@@ -126,7 +126,10 @@ Tree-based methods get around this by allowing for distinct partitions.  Our res
 
 #### Mechanics of modeling.
 
-For each model approach approach we employ the [`sklearn.model_selection.GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below 
+<img width="450" align="left" src="./Graphics/EdwardsConundrum.png" > 
+
+For each model approach approach we employ the [`sklearn.model_selection.GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
+
 
 
 ### Model Evaluation.

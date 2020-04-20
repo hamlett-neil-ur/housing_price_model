@@ -163,7 +163,23 @@ Second, the some outliers are occurring.  These are evident when for example <im
 
 Now, our second set of response and residual plots represent results for the linear-regression model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
 
-Our tree-based models do perform marginally better.  The distincts are not dramatic. This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better.
+Our tree-based models do perform marginally better.  The distincts are not dramatic. This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better. Further analysis is needed.
+
+Finally, our models consistently perform better against training data than against test data.  This is unequivocally attributable to overfitting in the case of the Knn regressor.  Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test).
+
+## Further directions.  
+
+This work is still in a preliminary stage. We demonstrate here the ability to establish a should-cost market price with a reasonable degree of accuracy. The opportunity appears to exist for improvement.
+
+First, we suspect overfitting for our best models, the tree-based models.  To the extent that this has occurred, the model learned idiosyncratic noise from the training data. This will distort its interpretation of the not-previously-seen test data.  After we eliminate heterogeneity as an explanation, we can perform additional hyper-parameter tuning to get the training and test scores more in balance. We expect this leads to some reduction in the training scores to the benefit of the test scores.
+
+Second, our original use case asks for distributions for response-variable estimates as opposed to point estimates we presently get.  This allows to assert with an estimated probability that a listed price falls below the market price by a predetermined threshold. Included among the approaches are metalog distribytions by [[Keelin, 2016]](https://pubsonline.informs.org/doi/10.1287/deca.2016.0338).  Some of the illustrative literature for [Multi-Attribute Regression Splines](https://github.com/scikit-learn-contrib/py-earth) (MARS) demonstrates its use for residual analysis.
+
+Finally, we can add additional data to the model.  Our protytpical data set spans the period from 2006 to 2010.  This of course includes the period including the runup to and aftermath from the late-2000s financial crisis. In general, prices change year-on-year. Things were occurring during that period with a high degree of volatility.
+
+The U.S. [Federal Housing Finance Agency](https://www.fhfa.gov/) publishes a [house-price index](https://www.fhfa.gov/DataTools/Downloads/Pages/House-Price-Index.aspx). This shows trends in housing prices, both upward and downward.  Were we to scale our `SalePrice` response variable to this index, we could better account for this variability.
+
+Other explanatory variables may also instructive. During the 2000s real-estate bubble, [*Economist*](https://www.economist.com/) magazine  periodically published its own [house-price index](https://infographics.economist.com/2017/HPI/index.html). This model was based on the theory that purchase prices are influenced by rent prices and household incomes within a geographic market.  This motivates the incorporation of these attributes into our model.  The U.S. [Bureau of Labor Statistics](https://www.bls.gov/) publishes these data. 
 
 
 

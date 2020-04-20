@@ -129,11 +129,18 @@ Tree-based methods get around this by allowing for distinct partitions.  Our res
 <img width="750" align="left" src="./Graphics/EdwardsConundrum.png" > 
 
 
-For each model approach approach we employ the [`sklearn.model_selection.GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
+For each model approach approach we employ the [sklearn.model_selection.GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
 
-Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeard driven by outliers. The figure to the left illustrates. Two particular observations appeared as outliers from the rest. 
+Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeard driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.
+
 
 ### Model Evaluation.
+
+The table below contains summary statistics for the best model from each approach. It reports squared-error and coefficient-of-determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics for each approach.  These statistics are commonly used in analysis-of-variance (ANOVA) analysis for regression modelng (e.g., [[Sahai, 2004]](https://www.springer.com/us/book/9780817632304),  [[Dielman, 2005]](https://amzn.to/3eBjK8L)). It contains results for both training and test data.
+
+Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
+
+We highlight the tree-based methods.  These achieved the best performance on the test data.  In particular, the *bagging-tree regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.876.  
 
 
 <img width="1000" align="center" src="./Graphics/200419 Model ANOVAs.png" > 

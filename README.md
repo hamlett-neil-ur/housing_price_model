@@ -71,7 +71,7 @@ Our degree-of-influence analysis for categorical variables is somewhat less-dire
 
 Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This provides multiple pieces of useful information.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of pronounced multicollinearity.   In general, knowing exactly how many explanatory-variable dimensions are actually influential can be useful.
 
-<img width="450" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
+<img width="600" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
 
 The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
 
@@ -94,7 +94,7 @@ The rows in the table contain points of view on the strengths and weaknesses ass
 
 This work attempts to span the families in this table.  We however consider slightly different groupings.  The first group consists of methods that linearly transform explanatory-variable observations according to an operation resembling <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.  This class includes regression modeling, support-vector machines, artificial neural networks (ANNs), and kernel methods. 
 
-The first two explicitly use <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations in their formulations. ANNs use cascaded <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0\big)"> operations of our linear transform.  The 𝜙 functions are rectifier linear unit (RELU) operators. 
+The first two explicitly use <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations in their formulations. ANNs use cascaded <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0\big)"> operations of our linear transform.  The 𝜙 functions are [rectifier linear unit (RELU) operators](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/). 
 
 The kernel methods — to which the kNN regressor belongs — fit less-well into this grouping.  They employ transforms of the form <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i\big)">.  The transform vector 𝝱 however is not uniform across all observations.  The kernel methods *scan* over the explanatory-variable space in a method resembling filtering and pooling in convolutional neural networks [[Haykin, 2009, §4.17]](https://amzn.to/3cvvO9J).
 
@@ -104,7 +104,7 @@ The kernel methods — to which the kNN regressor belongs — fit less-well into
 
 *Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.  Alternatively, tree-based methods divide the data using *recursive binary partitioning* ([[Brieman, *et al*, 1984]](https://amzn.to/3ankMSn) [[Hastie, *et al*, 2009, §9.2]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)). The figure to the left contains an example from [[Brieman, *et al*, 1984, Fig. 2.3]](https://amzn.to/3ankMSn). 
 
-In a regression context — our case of interest — this produces approximations that are piecewise constant.  The partitining is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error.
+In a regression context — our case of interest — this produces approximations that are piecewise constant.  The partitioning is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error in curve-fitting contexts.
 
 Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
 

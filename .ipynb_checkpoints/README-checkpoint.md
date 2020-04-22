@@ -9,8 +9,6 @@
 # Residential Real-Estate Spot-Market Pricing Model for Ames, IA.
 
 
-### Deliverable: Friday, January 17, 2020 Interim Review
-
 ## Executive Summary.
 Uncertainty research provides a preliminary capability to identify below-market opportunities. These assets can be acquired quickly on the spot market. A predictive model employs $N$ features to estimate should-cost priceses. 
 
@@ -20,7 +18,7 @@ Two aspects of investors' operating model tend to deliver higher profitability t
 
 The image below illustrates the concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
-The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains between 80% and 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
+The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains approximately 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
 
 
 
@@ -35,27 +33,153 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 ### Business Understanding
 
 
+The figure to the below summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
+
 <img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
+
+Here,  we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would provide real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/) and possible [Zillow](https://www.zillow.com/).  
+
+The work summarized here represents the first step in the `Spot-market pricing model` component of the workflow. We establish here the ability to estimate the *should-cost* price of a home.  We focus at this stage on point estimates.  We extend this in subseqent work to a distribution of expected prices. This allows us to specify a below-market-price threshold, at which the REIT might elect to buy.
+
+The `total ownership-cost model` is a [net-present-value](https://www.investopedia.com/terms/n/npv.asp) (NPV) model of all costs except for the acquisition costs. This is based on a [discounted cash-flow](https://www.investopedia.com/terms/d/dcf.asp) (DCF) analysis of ownership costs such as taxes, maintenance, and insurance.  DCF is a foundational practice in financial accounting (e.g., [[Pratt, 2016]](https://amzn.to/2KkjH3c), [[Libby, *et al*, 2019]](https://amzn.to/2VpcqFD), [[Brealey, *et al*, 2020]](https://amzn.to/3ew0wkV)).  
+
+Finally, an automated decision-making framework would provide REIT asset-portfolio managers with recommendations regarding whether to attempt a purchase of the property. The decision model follows principles from the decision sciences (e.g., [[Kochenderfer, 2015]](https://amzn.to/34RA5BR), [[Skalna, *et al*, 2015]](https://www.springer.com/us/book/9783319264929), [[Howard, 2015]](https://amzn.to/2XS2aYi)).  
+
+For each of the foregoing stages in the purchasing-decision process, we develop distributions of the factors influencing our decision.  These are inferred from the data and fit to a distribution (e.g., [[Keelin, 2016]](https://pubsonline.informs.org/doi/10.1287/deca.2016.0338)).  In sume cases they might be elicited from experts through a process resembling that described by [[Spetzler, 1975]](https://pubsonline.informs.org/doi/abs/10.1287/mnsc.22.3.340).  The overall process is designed using a *probabilistic* approach [[Walsh, 2020]](https://hbr.org/2020/02/develop-a-probabilistic-approach-to-managing-uncertainty).  
 
 
 ### Data Understanding, Perparation.
 
+Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure below depicts summary statistics from the data dictionary, included as an appendix to the end of this report.  We begin with a flat table containing 2,051 records with 83 attributes each. 
 
+<img width="1000" align="center" src="./Graphics/DataDictSummy.png" > 
+
+
+Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We se a small nuber of of records for which many features are missing.  We also see some attributes for which most records lack values.  Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. 
+
+The analysis also shows the different attribute categories that appear in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes.  One of the continuous variables `SalesPrice` is our target variable.
+
+<img width="350" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
+
+This amount of attributes is considerable.  We at risk from the *curse of dimensionality* [[Hastie, *et al*, 2009, §2.5]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This becomes particularly acute considering our the number of categorical attributes.  When we *dummify* — e.g., [[pandas.get_dummies()]](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html) — the data, the attribute dimensionality could be multiples greater.  
+
+Paring the attribute space provides our response, here. We pair-wise analyze each explanatory variable's relationship with the target variable `SalesPrice`.  This is accomplished via two methods. We consider the pair-wise correlations for continuous and discrete variables. The heatmap column to the right illustrates.  We retain continuous and discrete explanatory variables whose correlation with the response variable exceeds 0.45.  This gives us six continous and five discrete variables.
+
+Our degree-of-influence analysis for categorical variables is somewhat less-direct. We assume that if a categorical variable is a good predictor of a continuous response variable, then the converse should also be true.  So, we construct univariate multinomial logistic-regression models for each categorical variable. We use our `SalesPrice` response variable as the explanatory variable for each such model. We retain categorical variables for which `SalesPrice` predicts their class with accuracy exceeding 0.55. This leaves us with 33 influential categorical variables. After dummifying, we end up with 177 explanatory variables.
+
+Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This  is always advised for multiple reasons.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of multicollinearity.  In general, knowing exactly how many explanatory-variable dimensions are actually influential can be useful.
+
+<img width="450" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
+
+The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
+
+
+We find that our 177 explanatory variables are highly dimensionally-domnated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.
 
 ### Modeling.
 
+<img width="650" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
 
-<img width="600" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
+We consider a diverse variety of models. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of each family of methods.  
+
+For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
+
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Modeling activities here emphasize predictive power, resistence to overfitting, and conditional probability. 
+
+#### Approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.
+
+This work attempts to span the families in this table.  We however consider slightly different groupings.  The first group consists of methods that linearly transform explanatory-variable observations according to an operation resembling <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.  This class includes regression modeling, support-vector machines, artificial neural networks (ANNs), and kernel methods. 
+
+The first two explicitly use <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations in their formulations. ANNs use cascaded <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0\big)"> operations of our linear transform.  The 𝜙 functions are rectifier linear unit (RELU) operators. 
+
+The kernel methods — to which the kNN regressor belongs — fit less-well into this grouping.  They employ transforms of the form <img src="https://render.githubusercontent.com/render/math?math=\phi\big(\boldsymbol{\beta}^T\boldsymbol{x}_i\big)">.  The transform vector 𝝱 however is not uniform across all observations.  The kernel methods *scan* over the explanatory-variable space in a method resembling filtering and pooling in convolutional neural networks [[Haykin, 2009, §4.17]](https://amzn.to/3cvvO9J).
+
+#### Approaches based on recursive binary partitions.
+
+<img width="450" align="left" src="./Graphics/Tree Example.png" > 
+
+*Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.  Alternatively, tree-based methods divide the data using *recursive binary partitioning* ([[Brieman, *et al*, 1984]](https://amzn.to/3ankMSn) [[Hastie, *et al*, 2009, §9.2]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)). The figure to the left contains an example from [[Brieman, *et al*, 1984, Fig. 2.3]](https://amzn.to/3ankMSn). 
+
+In a regression context — our case of interest — this produces approximations that are piecewise constant.  The partitining is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error.
+
+Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
+
+*Random Forests* extend this smoothing through also randomly selecting from among the feature set [[Hastie, *et al*, 2009, chap 15]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). Instead of simply bootstrapping our observation set, we also randomly select the features on which partitioning decisions are based. 
+
+*Boosted Trees* "combines the outputs of many 'weak' estimators to produce a powerful 'committee'" [[Hastie, *et al*, 2009, chap 10]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). We "repeatedly grow shallow trees to the residuals, and hence build up an additive model consisting of the sum of trees" [[Efron, 2016, Chap 17]](https://amzn.to/2KmccsA).  At each stage, weights are applied to each of the training observations.  These weights apply emphasis to the observations for which the greatest error in the previous iterations occured. 
+
+#### Why the distinction between  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models and recursive binary partition?
+
+<img width="450" align="right" src="./Graphics/Bayes-net illustration.png" > 
+
+Recursive binary partitioning is paradigmatically distinct from  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> modeling in an important aspect. Specifically, they provide a distinct approach to handling of conditional probability.  Conditional probability is a key emphasis of *Probabilistic Graphical Models* (PGMs) (e.g,  [[Pearl, 1988]](https://amzn.to/2VISAnH)   [[Studený, 2005]](https://www.springer.com/us/book/9781852338916) [[Koller, 2009]](https://amzn.to/3aom53p)). The illustration to the right comes from [[Darwiche, 2009, Fig 4.2]](https://amzn.to/3amjVBy).
+
+Tree methods address conditional probability obliquely.  The binary cursive partitioning breaks observations into groups that are conspicuously distinct based on explanatory-variable values. This often proves a powerful approach to phenomenological heterogeneity.  
+
+Alternatively, approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> implicitly assume substantial homogeniety.  Response variables are related to numeric explanatory variables by the same set of slopes in the coefficient vector 𝝱. Distinct categories are handled by translating the intercept.  
+
+Consider for example the instance in which an observation belongs to the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category.  The indicator-function value for that attribute takes unity.  The effective slope — all other variables being equal — becomes <img src="https://render.githubusercontent.com/render/math?math=\beta_0%2B\beta_\nu">, and our estimate <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0%2B\beta_\nu">.
+
+*Why might this be problematic?*  Association with the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category might mean that we should have a coefficient vector different from 𝝱. Our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based methods only however admit to possibility of a single coefficient vector for all observations.
+
+Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}"> the piecewise-constant — the set-member average — for all members of a partition.  These estimates however can take on whatever value is appropriate to the partition-set members. It is unconstrained by values of some coefficient 𝝱, which must be shared by all other obsevations
+
+#### Mechanics of modeling.
+
+<img width="750" align="left" src="./Graphics/EdwardsConundrum.png" > 
 
 
+For each model approach approach we employ the [sklearn.model_selection.GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
 
+Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeard driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.
 
 
 ### Model Evaluation.
 
+The table below contains summary statistics for the best model from each approach. It reports squared-error and coefficient-of-determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics for each approach.  These statistics are commonly used in analysis-of-variance (ANOVA) analysis for regression modelng (e.g., [[Sahai, 2004]](https://www.springer.com/us/book/9780817632304),  [[Dielman, 2005]](https://amzn.to/3eBjK8L)). It contains results for both training and test data.
+
+Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
+
+We highlight the tree-based methods.  These achieved the best performance on the test data.  In particular, the *bagging-tree regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.876 against the training data.
+
 
 <img width="1000" align="center" src="./Graphics/200419 Model ANOVAs.png" > 
 
+Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  These resutls are less-strong.
+
+#### What do we believe is happening? 
+
+<img width="750" align="left" src="./Graphics/Bagg-Tree Resp Resid Plots.png" > 
+
+The figures to the left contain the residual and response plots for test and training estimates produced by the bagging-tree regressor. [[Olive, 2017]](https://www.springer.com/us/book/9783319552507) recommends this visualization.  The plots also contain [Locally-Weighted Scatterplot Smoothing](https://www.epa.gov/sites/production/files/2016-07/documents/loess-lowess.pdf) (LOWESS) curves, also recommended in [[Olive, 2017]](https://www.springer.com/us/book/9783319552507).
+
+First, the LOWESS curves do not perfectly coincide with the red-colored <img src="https://render.githubusercontent.com/render/math?math=y_i=\hat{y_i}"> or the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curves. This tells us that the model fails to capture some of the structure in the data. 
+
+Specifically, our model overestimates the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
+
+<img width="750" align="left" src="./Graphics/Resp_resid_train_test.png" > 
+
+Second, the some outliers are occurring.  These are evident when for example <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve. These instances appear likely to drive our coefficient of determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores. 
+
+Now, our second set of response and residual plots represent results for the linear-regression model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
+
+Our tree-based models do perform marginally better.  The distincts are not dramatic. This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better. Further analysis is needed.
+
+Finally, our models consistently perform better against training data than against test data.  This is unequivocally attributable to overfitting in the case of the Knn regressor.  Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test).
+
+## Further directions.  
+
+This work is still in a preliminary stage. We demonstrate here the ability to establish a should-cost market price with a reasonable degree of accuracy. The opportunity appears to exist for improvement.
+
+First, we suspect overfitting for our best models, the tree-based models.  To the extent that this has occurred, the model learned idiosyncratic noise from the training data. This will distort its interpretation of the not-previously-seen test data.  After we eliminate heterogeneity as an explanation, we can perform additional hyper-parameter tuning to get the training and test scores more in balance. We expect this leads to some reduction in the training scores to the benefit of the test scores.
+
+Second, our original use case asks for distributions for response-variable estimates as opposed to point estimates we presently get.  This allows to assert with an estimated probability that a listed price falls below the market price by a predetermined threshold. Included among the approaches are metalog distribytions by [[Keelin, 2016]](https://pubsonline.informs.org/doi/10.1287/deca.2016.0338).  Some of the illustrative literature for [Multi-Attribute Regression Splines](https://github.com/scikit-learn-contrib/py-earth) (MARS) demonstrates its use for residual analysis.
+
+Finally, we can add additional data to the model.  Our protytpical data set spans the period from 2006 to 2010.  This of course includes the period including the runup to and aftermath from the late-2000s financial crisis. In general, prices change year-on-year. Things were occurring during that period with a high degree of volatility.
+
+The U.S. [Federal Housing Finance Agency](https://www.fhfa.gov/) publishes a [house-price index](https://www.fhfa.gov/DataTools/Downloads/Pages/House-Price-Index.aspx). This shows trends in housing prices, both upward and downward.  Were we to scale our `SalePrice` response variable to this index, we could better account for this variability.
+
+Other explanatory variables may also instructive. During the 2000s real-estate bubble, [*Economist*](https://www.economist.com/) magazine  periodically published its own [house-price index](https://infographics.economist.com/2017/HPI/index.html). This model was based on the theory that purchase prices are influenced by rent prices and household incomes within a geographic market.  This motivates the incorporation of these attributes into our model.  The U.S. [Bureau of Labor Statistics](https://www.bls.gov/) publishes these data. 
 
 
 

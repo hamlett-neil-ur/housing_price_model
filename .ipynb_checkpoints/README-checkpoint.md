@@ -61,7 +61,7 @@ Our missing-value handling for this exploratory stage is simple.  We discard the
 
 The analysis also shows the different attribute categories that appear in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes.  One of the continuous variables `SalesPrice` is our target variable.
 
-<img width="300" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
+<img width="350" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
 
 This quantity of attributes is considerable.  We at risk from the *curse of dimensionality* [[Hastie, *et al*, 2009, §2.5]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This becomes particularly acute considering our the number of categorical attributes.  When we *dummify* — e.g., [[pandas.get_dummies()]](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html) — the data, the attribute dimensionality could be multiples greater.  
 

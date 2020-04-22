@@ -25,11 +25,8 @@ The model takes a diverse set of attributes about the characteristics of the pro
 ## Technical Approach.
 
 
-<p align="right">
+<div style="text-align: right"><strong><i>Figure 1</i></strong>— CRISP-DM Method.</div>
 
-***Figure 1***— CRISP-DM Method.
-
-</p>
 <img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
 [Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  Figure 1 provides an overview.  This method has provided the foundations for delivery methods used by many leading technology firms, including IBM.  

@@ -133,7 +133,7 @@ Tree-based methods get around this by allowing for distinct partitions.  Our res
 <img width="750" align="left" src="./Graphics/EdwardsConundrum.png" > 
 
 
-For each model approach approach we employ the [sklearn.model_selection.GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
+For each model approach approach we employ the [sklearn.model_selection. GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched.  
 
 Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeard driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.
 

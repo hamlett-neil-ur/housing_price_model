@@ -78,7 +78,7 @@ The figure to the left depicts results from dimensionality analysis of our 177 e
 
 We find that our 177 explanatory variables are highly dimensionally-dominated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.  
 
-The vertical-axis plot limits truncate the values for approximately the ten smallest singular values. These have quantities on the order of <img src="https://render.githubusercontent.com/render/math?math=\sim10^{-10}">. The *hat matrix* — <img src="https://render.githubusercontent.com/render/math?math=\big(\boldsymbol{X}^T\boldsymbol{X}\big)^{-1}\boldsymbol{X}^T"> — for a regression model would be singular in this case.
+The vertical-axis plot limits truncate the values for approximately the ten smallest singular values. These have quantities on the order of <img src="https://render.githubusercontent.com/render/math?math=\sim10^{-10}">. The *hat matrix* — <img src="https://render.githubusercontent.com/render/math?math=\big(\boldsymbol{X}^T\boldsymbol{X}\big)^{-1}\boldsymbol{X}^T"> — for a regression model would be practically singular in this case.
 
 ### Modeling.
 

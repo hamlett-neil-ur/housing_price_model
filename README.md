@@ -10,22 +10,23 @@
 
 
 ## Executive Summary.
-Uncertainty research outlines a preliminary capability to identify below-market opportunities to purchase residential properties. These assets can be acquired quickly on the spot market. A predictive model employs 77 features to estimate should-cost prices. 
 
-A hypothetical Real-Estate Investment Trust (REIT) initiated a fund to follow other hedge funds in to the residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
+
+Uncertainty research outlines a preliminary capability to identify below-market opportunities to purchase residential properties. A hypothetical Real-Estate Investment Trust (REIT) initiated a fund to follow other hedge funds in to the residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
 
 Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing single-family homes.  First, the funds buy their properties with cash.  This gives them advantages over housholdes dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
 
-The image below illustrates the concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
+<img width="450" align="right" src="./Graphics/20200116 CONOPS.svg.png" > 
 
-The model takes a diverse set of attributes about the characteristics of the property.   Technical details elaborate below.  It explains approximately 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
+
+The image to the right illustrates the overall concept for operations.  Property buyers on behalf of the fund look listings at below-market prices. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
+
+This describes the initial component for the *Spot-Market Pricing Model* component, illustrated in in the figure.  The model considers 77  characteristics of teach property.   Technical details elaborate below.  It explains approximately 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
 
 
 
 ## Technical Approach.
 
-
-<div style="text-align: right"><strong><i>Figure 1</i></strong>— CRISP-DM Method.</div>
 
 <img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
@@ -36,9 +37,7 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 ### Business Understanding
 
 
-The figure to the below summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
-
-<img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
+The figure in the executive summary above summarizes the concept of operations for our hypothetical REIT.  It seeks to find residential properties that are priced below the market.  Based on a total ownership cost model, it makes a decision whether to purchase the property.  Our REIT becomes an absentee landlord.  It rents the property out to qualified tenants.
 
 Here,  we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would provide real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/) and possible [Zillow](https://www.zillow.com/).  
 
@@ -56,7 +55,6 @@ For each of the foregoing stages in the purchasing-decision process, we develop 
 Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure below depicts summary statistics from the data dictionary, included as an appendix to the end of this report.  We begin with a flat table containing 2,051 records with 83 attributes each. 
 
 <img width="1000" align="center" src="./Graphics/DataDictSummy.png" > 
-
 
 Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We se a small nuber of of records for which many features are missing.  We also see some attributes for which most records lack values.  Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. 
 

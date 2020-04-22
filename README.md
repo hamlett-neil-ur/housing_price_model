@@ -16,10 +16,10 @@ Uncertainty research outlines a preliminary capability to identify below-market 
 
 Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing individual or small numbers of properties.  First, the funds purchase their properties using cash.  This gives them advantages over would-be owner/occupants dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
 
-<img width="600" align="right" src="./Graphics/20200116 CONOPS.svg.png" > 
+<img width="600" align="left" src="./Graphics/20200116 CONOPS.svg.png" > 
 
 
-The image to the right illustrates the overall *Concept for Operations*.  Property buyers operating on behalf of the fund look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
+The image to the left illustrates the overall *Concept for Operations*.  Property buyers operating on behalf of the fund look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
 This describes the initial component for the *Spot-Market Pricing Model* component, illustrated in in the figure.  The model considers 77  characteristics of each property.   The discussion below elaborates on technical details.  The prototype predictive model for spot-market pricing accounts for approximately 90% of the variation in sales price in the Ames, IA market.  Prices for *outlier* properties — exemplified by large-footprint properties in less-expensive neighborhoods — are estimated less accurately.
 

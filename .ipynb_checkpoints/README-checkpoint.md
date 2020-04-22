@@ -10,7 +10,7 @@
 
 
 ## Executive Summary.
-Uncertainty research provides a preliminary capability to identify below-market opportunities. These assets can be acquired quickly on the spot market. A predictive model employs $N$ features to estimate should-cost priceses. 
+Uncertainty research outlines a preliminary capability to identify below-market opportunities to purchase residential properties. These assets can be acquired quickly on the spot market. A predictive model employs 77 features to estimate should-cost prices. 
 
 A hypothetical Real-Estate Investment Trust (REIT) initiated a fund to follow other hedge funds in to the residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
 
@@ -24,6 +24,12 @@ The model takes a diverse set of attributes about the characteristics of the pro
 
 ## Technical Approach.
 
+
+<p align="right">
+
+***Figure 1***— CRISP-DM Method.
+
+</p>
 <img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
 [Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  Figure 1 provides an overview.  This method has provided the foundations for delivery methods used by many leading technology firms, including IBM.  
@@ -74,7 +80,7 @@ Finally, as is always recommended in high-dimensional scenarios, we perform dime
 The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
 
 
-We find that our 177 explanatory variables are highly dimensionally-domnated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.
+We find that our 177 explanatory variables are highly dimensionally-dominated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.
 
 ### Modeling.
 

@@ -16,7 +16,7 @@ Uncertainty research outlines a preliminary capability to identify below-market 
 
 Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing individual or small numbers of properties.  First, the funds purchase their properties using cash.  This gives them advantages over would-be owner/occupants dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
 
-<img width="450" align="right" src="./Graphics/20200116 CONOPS.svg.png" > 
+<img width="600" align="right" src="./Graphics/20200116 CONOPS.svg.png" > 
 
 
 The image to the right illustrates the overall *Concept for Operations*.  Property buyers operating on behalf of the fund look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
@@ -27,7 +27,7 @@ This describes the initial component for the *Spot-Market Pricing Model* compone
 ## Technical Approach.
 
 
-<img width="750" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
+<img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
 [Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  The figure to the right provides an overview.  This method has provided the foundation for delivery methods used by many leading technology firms, including IBM.  
 

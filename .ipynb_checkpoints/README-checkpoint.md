@@ -88,7 +88,7 @@ We consider a diverse variety of models. The figure to the right extends an impo
 
 For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
 
-The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Modeling activities here emphasize predictive power, resistence to overfitting, and conditional probability. 
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [[Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Modeling activities here emphasize predictive power, resistence to overfitting, and conditional probability. 
 
 #### Approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.
 

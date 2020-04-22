@@ -27,7 +27,7 @@ This describes the initial component for the *Spot-Market Pricing Model* compone
 ## Technical Approach.
 
 
-<img width="600" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
+<img width="750" align = "right" src="./Graphics/191227 CRISP-DM.svg.png" >
 
 [Uncertainty Research's](https://www.linkedin.com/company/uncertainty-research-llc/about/) (UR's) delivery method is based on the [Cross-Industry Standard Process – Data Mining](http://4.bp.blogspot.com/-0iGdZDGnLks/VDA-7DKV_NI/AAAAAAAAAEI/IqYBNniTlZA/s1600/141004%2BFormal%2BMethods%2BComparison.png) (CRISP–DM).  The figure to the right provides an overview.  This method has provided the foundation for delivery methods used by many leading technology firms, including IBM.  
 

@@ -12,17 +12,16 @@
 ## Executive Summary.
 
 
-Uncertainty research outlines a preliminary capability to identify below-market opportunities to purchase residential properties. A hypothetical Real-Estate Investment Trust (REIT) seeks to enter residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 20176](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
+Uncertainty research outlines a preliminary capability to identify below-market opportunities to purchase residential properties. A hypothetical Real-Estate Investment Trust (REIT) seeks to enter residential real-estate rental market.  The business model is described in [R. Dizember, L. Kuzisto, *WSJ*, July 21, 2017](https://www.wsj.com/articles/meet-your-new-landlord-wall-street-1500647417) and [A. Semiuels, *The Atlantic*, February 13, 2019](https://www.theatlantic.com/technology/archive/2019/02/single-family-landlords-wall-street/582394/), among other places.  
 
-Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing single-family homes.  First, the funds buy their properties with cash.  This gives them advantages over would-be owner/occupants dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
+Two aspects of investors' operating model tend to deliver higher profitability than conventional landlords managing individual or small numbers of properties.  First, the funds purchase their properties using cash.  This gives them advantages over would-be owner/occupants dependendent on financing.  Second, they transfer costs to tenents that are conventionally borne by landlords. Tenants, for example, assume resonsibility for some maintenance cost.
 
 <img width="450" align="right" src="./Graphics/20200116 CONOPS.svg.png" > 
 
 
-The image to the right illustrates the overall concept for operations.  Property buyers operating on behalf of the fund look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
+The image to the right illustrates the overall *Concept for Operations*.  Property buyers operating on behalf of the fund look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
-This describes the initial component for the *Spot-Market Pricing Model* component, illustrated in in the figure.  The model considers 77  characteristics of teach property.   Technical details elaborate below.  It explains approximately 90% of the variation in sales price in the Ames, IA market.  It does not handle outliers, exemplified by large-footprint properties in less-expensive neighborhoods.
-
+This describes the initial component for the *Spot-Market Pricing Model* component, illustrated in in the figure.  The model considers 77  characteristics of each property.   The discussion below elaborates on technical details.  The prototype predictive model for spot-market pricing accounts for approximately 90% of the variation in sales price in the Ames, IA market.  Prices for *outlier* properties — exemplified by large-footprint properties in less-expensive neighborhoods — are estimated less accurately.
 
 
 ## Technical Approach.

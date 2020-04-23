@@ -71,7 +71,7 @@ Our degree-of-influence analysis for categorical variables is somewhat less-dire
 
 Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This provides multiple pieces of useful information.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of pronounced multicollinearity.   In general, knowing the effective dimensions explanatory-variable is very useful.
 
-<img width="600" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
+<img width="500" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
 
 The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
 

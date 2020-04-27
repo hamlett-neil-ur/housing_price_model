@@ -141,7 +141,7 @@ Also, we apply a logarithmic transform to the response variable.  The figure bel
 
 We see in the plots that the log-transformation produces a distribution that is both more concentrated and more symmetric. The un-transformed response variable is quite skewed, at 1.56.  It also appears to have a long upper tail.  The log-transformed reponse variable is much less skewed. It appears to have a long lower tale, but much less long than the un-transformed response variable.
 
-Neither distribution passes statistical tests for normality.  Nonetheless, the 
+Neither distribution passes statistical tests for normality.  Nonetheless, the log-transformed response variable appears to be much closer to normal.  This helps us in particular with respect to regression modeling.  The more-concetrated distributions should also help us with nonparametric models, also.
 
 
 Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeared to be driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.

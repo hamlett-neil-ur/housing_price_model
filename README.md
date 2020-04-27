@@ -151,13 +151,13 @@ Some additional manual effort was applied to the linear-regression model.  Speci
 
 The table below contains summary statistics for the best model from each approach. It reports squared-error and coefficient-of-determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics for each approach.  These statistics are commonly used in analysis-of-variance (ANOVA) analysis for regression modelng (e.g., [[Sahai, 2004]](https://www.springer.com/us/book/9780817632304),  [[Dielman, 2005]](https://amzn.to/3eBjK8L)). It contains results for both training and test data.
 
+<img width="1000" align="center" src="./Graphics/200426 Model ANOVAs.png" > 
+
 Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
 
 Two tree-based ensemble methods are highlighted in the table.  These achieved the best performance on the test data.  In particular, the *random-forest regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.870 against the training data.  The performance of the *bagging-tree regressor* was approximately equivalent.
 
 Both methods appear to have yielded near-optimum fits.  The <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores anfor the training and test data coincide very closely. The other ensemble method, the *ada-boosted tree regressor* provides performance that is not far behind.  None of these methods leads to significant overfitting. These methods appear to have *smoothed* out the variance. That is the motivation for ensemble methods.  
-
-<img width="1000" align="center" src="./Graphics/200426 Model ANOVAs.png" > 
 
 Somewhat surprisingly, the ridge-regression provided the strongest against the training data set <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.887">. This model is moderately overfit, yielding a trainnig score <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.855">.  It seems an optimally-fit model might yield results that coincide quite closely with the best from the tree-based ensemble methods, above.
 
@@ -185,6 +185,18 @@ Our ensemble tree-based models do perform considerably better.  This cursorily s
 Finally, many of our models consistently perform better against training data than against test data.    Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) to ascertain whether this occurs.  
 
 If not, our models are overfit. Overfit models capture the structure of idiosyncratic noise in the training data.  This adversely affects performance for previously-unseen data, including test data.  More-careful tuning gets us the best scenario, where scores for training and test data coincide almost exactly.
+
+
+<img width="750" align="right" src="./Graphics/Bivariate price distributions.png" > 
+
+What about bias in our model?  The figure to the right gives us some clues. Bias, again, occurs when our model fails to capture the phenomenology. In our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models, this occurs when the relationships between an explanatory variable and the response variable are nonlinear. These plots show bivariate relationships between `GrLivArea` living space and `YearBuilt` — two of our explanatory variables with the strongest correlation with the response variable — and `SalePrice`.
+
+These visualizations contain two representations superimposed upon each other.  The contour plots are bivariate kernel-density estimates [[Hastie, *et al*, 2009, §6.6]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). The superimposed curves are [Locally-Weighted Scatterplot Smoothing](https://www.statisticshowto.com/lowess-smoothing/) (LOWESS).  These are two-dimensional *slices* through the data.
+
+Apparently, the relationship between size and price is approximately linear, but the relationship between age and price is not. The size-versus price relationship is somewhat surprising.  Realtors advise would-be sellers against extrapolating price-per-square-foot from smaller properties in their markets. This might be less-precarious in Ames, IA than perhaps other markets.
+
+We would expect that our tree-based methods would be more likely to overcome the age-versus-price nonlinearity than the <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models. Perhaps this is not a key driver of the bias we see in the response or scatter plots above.  It is difficult to tell whether when an where this drives our tree algorithms to split along this dimension.
+
 
 ## Further directions.  
 

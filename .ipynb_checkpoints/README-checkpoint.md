@@ -157,8 +157,10 @@ Two tree-based ensemble methods are highlighted in the table.  These achieved th
 
 Both methods appear to have yielded near-optimum fits.  The <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores anfor the training and test data coincide very closely. The other ensemble method, the *ada-boosted tree regressor* provides performance that is not far behind.  None of these methods leads to significant overfitting. These methods appear to have *smoothed* out the variance. That is the motivation for ensemble methods.  
 
-
 <img width="1000" align="center" src="./Graphics/200426 Model ANOVAs.png" > 
+
+Somewhat surprisingly, the ridge-regression provided the strongest against the training data set <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.887">. This model is moderately overfit, yielding a trainnig score <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.855">.  It seems an optimally-fit model might yield results that coincide quite closely with the best from the tree-based ensemble methods, above.
+
 
 Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  Results from the latter two are less-strong.
 

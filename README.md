@@ -73,7 +73,7 @@ Finally, as is always recommended in high-dimensional scenarios, we perform dime
 
 <img width="500" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
 
-Secondly, we get insight into the smallest number of explanatory variables a model with the lowest-achievable bias can potentially have. The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
+Secondly, we get insight into the smallest number of explanatory variables a model with the lowest-achievable bias can potentially have. The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP), [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT)).  
 
 
 We find that our 177 explanatory variables are highly dimensionally-dominated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.  

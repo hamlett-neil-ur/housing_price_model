@@ -88,7 +88,7 @@ We consider a diverse variety of models. The figure to the right extends an impo
 
 For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
 
-The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [[Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Modeling activities here emphasize predictive power, resistence to overfitting, and conditional probability. 
+The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original table in  [[Hastie, *et al*, 2009]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to contain three more. Model evaluation here focuses on predictive power, resistence to overfitting, and conditional probability. 
 
 #### Approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">.
 
@@ -104,7 +104,7 @@ The kernel methods — to which the kNN regressor belongs — fit less-well into
 
 *Tree*-based methods comprise our second class of methods.  These are distinct in that they do not involve <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-type operations.  Alternatively, tree-based methods divide the data using *recursive binary partitioning* ([[Brieman, *et al*, 1984]](https://amzn.to/3ankMSn) [[Hastie, *et al*, 2009, §9.2]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf)). The figure to the left contains an example from [[Brieman, *et al*, 1984, Fig. 2.3]](https://amzn.to/3ankMSn). 
 
-In a regression context — our case of interest — this produces approximations that are piecewise constant.  The partitioning is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error in curve-fitting contexts.
+In a curve-fitting context — our case of interest — this produces approximations that are piecewise constant.  The partitioning is accomplished in a way that maximally distinguishes groups being separated according to some statistical score.  Usually, this is the mean-square error in curve-fitting contexts.
 
 Our analysis here considers four variants of tree-based modeling. We first look for the best model for a basic regression tree.  The remaining variants are *ensemble methods*. The first is a *bagging tree*. This simply involves creating a bunch of trees from bootstrap samples of the data. The results of the trees are averaged together.
 
@@ -118,15 +118,15 @@ Our analysis here considers four variants of tree-based modeling. We first look 
 
 Recursive binary partitioning is paradigmatically distinct from  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> modeling in an important aspect. Specifically, they provide a distinct approach to handling of conditional probability.  Conditional probability is a key emphasis of *Probabilistic Graphical Models* (PGMs) (e.g,  [[Pearl, 1988]](https://amzn.to/2VISAnH)   [[Studený, 2005]](https://www.springer.com/us/book/9781852338916) [[Koller, 2009]](https://amzn.to/3aom53p)). The illustration to the right comes from [[Darwiche, 2009, Fig 4.2]](https://amzn.to/3amjVBy).
 
-Tree methods address conditional probability obliquely.  The binary cursive partitioning breaks observations into groups that are conspicuously distinct based on explanatory-variable values. This often proves a powerful approach to addressing phenomenological heterogeneity.  
+Tree methods address conditional probability obliquely.  The recursive binary partitioning breaks observations into groups that are conspicuously distinct based on explanatory-variable values. This often proves a powerful approach to addressing phenomenological heterogeneity.  
 
 Alternatively, approaches based on <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> implicitly assume substantial homogeniety.  Response variables are related to numeric explanatory variables by the same set of slopes in the coefficient vector 𝝱. Distinct categories are handled by translating the intercept.  
 
 Consider for example the instance in which an observation belongs to the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category.  The indicator-function value for that attribute takes unity.  The effective intercept — all other variables being equal — becomes <img src="https://render.githubusercontent.com/render/math?math=\beta_0%2B\beta_\nu">, and our estimate <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0%2B\beta_\nu">.
 
-*Why might this be problematic?*  Association with the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category might mean that we should have a coefficient vector different from 𝝱. Our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based methods only however admit to possibility of a single coefficient vector for all observations. Phenomenological homogeniety is implicit.
+*Why might this be problematic?*  Association with the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category might mean that we should have a coefficient vector different from 𝝱. Our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based methods only however admit to possibility of a single coefficient vector for all observations across all categories. Phenomenological homogeniety is implicit.
 
-Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}"> the piecewise-constant — the set-member average — for all members of a partition.  These estimates however can take on whatever value is appropriate to the partition-set members. It is unconstrained by values of some coefficient 𝝱, which must be shared by all other obsevations.  A piecewise-constant representation of the response variable is the cost, however. 
+Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}"> the piecewise-constant — the set-member average — for all members of a partition.  These estimates however can take on whatever value is appropriate to the partition-set members. It is unconstrained by values of some coefficient 𝝱, which must be shared by all other obsevations.  A piecewise-constant representation of the response curve is the cost, however. 
 
 #### Mechanics of modeling.
 
@@ -141,7 +141,7 @@ Also, we apply a logarithmic transform to the response variable.  The figure bel
 
 We see in the plots that the log-transformation produces a distribution that is both more concentrated and more symmetric. The un-transformed response variable is quite skewed, at 1.56.  It also appears to have a long upper tail.  The log-transformed reponse variable is much less skewed. It appears to have a long lower tale, but much less long than the un-transformed response variable.
 
-Neither distribution passes statistical tests for normality.  Nonetheless, the log-transformed response variable appears to be much closer to normal.  This helps us in particular with respect to regression modeling.  The more-concetrated distributions should also help us with nonparametric models, also.
+Neither distribution passes statistical tests for normality.  Nonetheless, the log-transformed response variable appears to be much closer to normal.  This helps us in particular for linear modeling.  The more-concetrated distributions should also help us with nonparametric models, also.
 
 
 Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeared to be driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.

@@ -135,7 +135,7 @@ Tree-based methods get around this by allowing for distinct partitions.  Our res
 
 For each model approach approach we employ the [sklearn](https://scikit-learn.org/stable/) [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. For each hyper-parameter gridpoint we calculate five-fold cross-validation. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched, as well as the values for the best models.
 
-Also, we apply a logarithmic transform to the response variable.  The figure below highlights our motivation.  We see [kernel-density estimates](https://en.wikipedia.org/wiki/Kernel_density_estimation) of our response variable `SalePrice` as given, and of its logarithm.  Each plot contains skew statistics.
+Also, we apply a logarithmic transform to the response variable.  The figure above highlights our motivation.  We see [kernel-density estimates](https://en.wikipedia.org/wiki/Kernel_density_estimation) of our response variable `SalePrice` as given, and of its logarithm.  Each plot contains skew statistics.
 
 We see in the plots that the log-transformation produces a distribution that is both more concentrated and more symmetric. The un-transformed response variable is quite skewed, at 1.56.  It also appears to have a long upper tail.  The log-transformed reponse variable is much less skewed. It appears to have a long lower tale, but much less long than the un-transformed response variable.
 

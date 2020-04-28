@@ -155,16 +155,15 @@ The table below contains summary statistics for the best model from each approac
 
 <img width="1000" align="center" src="./Graphics/200426 Model ANOVAs.png" > 
 
-Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
+Now, model-overfitting is the bain of any statistical modeler's existence. In an optimally-fit model, we look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
 
 Two tree-based ensemble methods are highlighted in the table.  These achieved the best performance on the test data.  In particular, the *random-forest regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.870 against the training data.  The performance of the *bagging-tree regressor* was approximately equivalent.
 
 Both methods appear to have yielded near-optimum fits.  The <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores anfor the training and test data coincide very closely. The other ensemble method, the *ada-boosted tree regressor* provides performance that is not far behind.  None of these methods leads to significant overfitting. These methods appear to have *smoothed* out the variance. That is the motivation for ensemble methods.  
 
-Somewhat surprisingly, the ridge-regression provided the strongest against the training data set <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.887">. This model is moderately overfit, yielding a trainnig score <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.855">.  It seems an optimally-fit model might yield results that coincide quite closely with the best from the tree-based ensemble methods, above.
+Somewhat surprisingly, the ridge-regression provided the strongest against the training data set <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.887">. This model is moderately overfit, yielding a trainnig score <img src="https://render.githubusercontent.com/render/math?math=R^2\approx0.855">.  It seems an optimally-fit linear model might yield results that coincide quite closely with the best of the tree-based ensemble methods, above.
 
-
-Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  Results from the latter two are less-strong.
+Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  Results from the latter two are less-strong.  These disparities merit further subsequent investigation.
 
 #### What do we believe is happening? 
 
@@ -182,11 +181,9 @@ Second, the some outliers are occurring.  These are evident when for example <im
 
 Now, our second set of response and residual plots depict results for the linear-regression model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
 
-Our ensemble tree-based models do perform considerably better.  This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better. Moreover, ensembling smooths out variance, which apparently mitigates overfitting. Further analysis is needed.
+Our ensemble tree-based models do perform marginally better than the linear model.  This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better. Moreover, ensembling smooths out variance, which apparently mitigates overfitting. Further analysis is needed.
 
-Finally, many of our models consistently perform better against training data than against test data.    Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) to ascertain whether this occurs.  
-
-If not, our models are overfit. Overfit models capture the structure of idiosyncratic noise in the training data.  This adversely affects performance for previously-unseen data, including test data.  More-careful tuning gets us the best scenario, where scores for training and test data coincide almost exactly.
+Finally, many of our models consistently perform better against training data than against test data.    Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) to ascertain whether this occurs. That our tree-based ensemble methods appear optimally fit however inclines us to suspect overfitting by some of the other model approaches. 
 
 
 <img width="750" align="right" src="./Graphics/Bivariate price distributions.png" > 

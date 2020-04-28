@@ -188,7 +188,7 @@ Finally, many of our models consistently perform better against training data th
 
 <img width="750" align="right" src="./Graphics/Bivariate price distributions.png" > 
 
-***What about bias in our model?***  The figure to the right gives us some clues. Bias, again, occurs when our model fails to capture the phenomenology. In our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models, this occurs when the relationships between an explanatory variable and the response variable are nonlinear. These plots show bivariate relationships between `GrLivArea` living space and `YearBuilt` — two of our explanatory variables with the strongest correlation with the response variable — and `SalePrice`.
+***What about bias in our models?***  The figure to the right gives us some clues. Bias, again, occurs when our model fails to capture the phenomenology. In our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models, this occurs when the relationships between an explanatory variable and the response variable are nonlinear. These plots show bivariate relationships between `GrLivArea` living space and `YearBuilt` — two of our explanatory variables with the strongest correlation with the response variable — and `SalePrice`.
 
 These visualizations contain two representations superimposed upon each other.  The contour plots are bivariate kernel-density estimates [[Hastie, *et al*, 2009, §6.6]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). The superimposed curves are [Locally-Weighted Scatterplot Smoothing](https://www.statisticshowto.com/lowess-smoothing/) (LOWESS).  These are two-dimensional *slices* through the data.
 

@@ -40,7 +40,7 @@ The figure in the executive summary above summarizes the concept of operations f
 
 Here, we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would obtain real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/), or possibly [Zillow](https://www.zillow.com/).  
 
-The work summarized here represents the first step in the `Spot-market pricing model` component of the workflow. We prototype here the ability to estimate the *should-cost* price of a home.  We focus at this stage on point estimates.  We extend this in subseqent work to estimated probability distributions of expected prices. This allows us to specify a below-market-price-probability threshold, at which the REIT might elect to buy.
+The work summarized here represents the first step in the `Spot-market pricing model` component of the workflow. We prototype here the ability to estimate the *should-cost* price of individual residential properties.  We focus at this stage on point estimates.  We extend this in subseqent work to estimated probability distributions of expected prices. This allows us to specify a below-market-price-probability threshold, at which the REIT might elect to buy.
 
 The `total ownership-cost model` estimates the [net-present-value](https://www.investopedia.com/terms/n/npv.asp) (NPV) of all projected rental income and costs except, for the acquisition costs. This is based on a [discounted cash-flow](https://www.investopedia.com/terms/d/dcf.asp) (DCF) analysis of *expected* costs such as taxes, maintenance, and insurance.  DCF is a foundational practice in financial accounting (e.g., [[Pratt, 2016]](https://amzn.to/2KkjH3c), [[Libby, *et al*, 2019]](https://amzn.to/2VpcqFD), [[Brealey, *et al*, 2020]](https://amzn.to/3ew0wkV)).  
 
@@ -73,7 +73,7 @@ Finally, as is always recommended in high-dimensional scenarios, we perform dime
 
 <img width="500" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
 
-The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
+Secondly, we get insight into the smallest number of explanatory variables a model with the lowest-achievable bias can potentially have. The figure to the left depicts results from dimensionality analysis of our 177 explanatory variables. This results from [*singular-value decomposition*](https://en.wikipedia.org/wiki/Singular_value_decomposition) of our explanatory-variable matrix. This tells us how much of the information in our explanatory variables is actually independent (e.g., [[Golub, 1989, §8.3]](https://amzn.to/2VHuzNT), [[Horn, 1985, §7.3.5]](https://amzn.to/3aoWdEP)).  
 
 
 We find that our 177 explanatory variables are highly dimensionally-dominated. Most of the variance is contained in the first ten dimensions. In fact, only four dimensions contain 99% of the variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result as using all of them.  We do not attempt this here, however.  

@@ -173,7 +173,7 @@ The figures to the left contain the residual and response plots for test and tra
 
 First, the LOWESS curves do not perfectly coincide with the red-colored <img src="https://render.githubusercontent.com/render/math?math=y_i=\hat{y_i}"> or the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curves. This tells us that the model fails to capture some of the structure in the data. It contains some bias.
 
-Specifically, our model overestimates the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
+Specifically, our model *underestimates* the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
 
 <img width="750" align="left" src="./Graphics/Resp_resid_train_test.png" > 
 

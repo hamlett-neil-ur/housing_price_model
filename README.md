@@ -126,7 +126,7 @@ Consider for example the instance in which an observation belongs to the <img sr
 
 *Why might this be problematic?*  Association with the <img src="https://render.githubusercontent.com/render/math?math=\nu^{th}"> category might mean that we should have a coefficient vector different from 𝝱. Our <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based methods only however admit to possibility of a single coefficient vector for all observations across all categories. Phenomenological homogeniety is implicit.
 
-Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}"> the piecewise-constant — the set-member average — for all members of a partition.  These estimates however can take on whatever value is appropriate to the partition-set members. It is unconstrained by values of some coefficient 𝝱, which must be shared by all other obsevations.  A piecewise-constant representation of the response curve is the cost, however. 
+Tree-based methods get around this by allowing for distinct partitions.  Our response-variable estimates <img src="https://render.githubusercontent.com/render/math?math=\hat{y}"> the piecewise-constant — the set-member average — for all members of a partition.  These estimates however can take on whatever value is appropriate to the partition-set members. It is unconstrained by values of some coefficient 𝝱, which must be shared by all other obsevations.  However, a piecewise-constant representation of the response curve is the cost of allowing for phenomenological heterogeneity. 
 
 #### Mechanics of modeling.
 

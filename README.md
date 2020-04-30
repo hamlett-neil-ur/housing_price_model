@@ -114,9 +114,10 @@ Our analysis here considers four variants of tree-based modeling. We first look 
 
 #### Why the distinction between  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0">-based models and recursive binary partition?
 
+Recursive binary partitioning is paradigmatically distinct from  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> modeling in an important aspect. Specifically, it provides a distinct approach to handling of conditional probability.  *When is conditional probability important?* When the phenomena being modeled span scenarios distinguished by *substantial behaviorial heterogeniety*.  That is, different cases in the phenomena exhibit characteristics that are substantially different, and cannot be handled by the same model or model parameters.
+
 <img width="450" align="right" src="./Graphics/Bayes-net illustration.png" > 
 
-Recursive binary partitioning is paradigmatically distinct from  <img src="https://render.githubusercontent.com/render/math?math=\boldsymbol{\beta}^T\boldsymbol{x}_i%2B\beta_0"> modeling in an important aspect. Specifically, it provides a distinct approach to handling of conditional probability.  *When is conditional probability important?* When the phenomena being modeled span scenarios distinguished by *substantial behaviorial heterogeniety*.  That is, different cases in the phenomena exhibit characteristics that are substantially different, and cannot be handled by the same model or model parameters.
 
 Conditional probability is a key emphasis of *Probabilistic Graphical Models* (PGMs) (e.g,  [[Pearl, 1988]](https://amzn.to/2VISAnH)   [[Studený, 2005]](https://www.springer.com/us/book/9781852338916) [[Koller, 2009]](https://amzn.to/3aom53p)). The illustration to the right comes from [[Darwiche, 2009, Fig 4.2]](https://amzn.to/3amjVBy). Tree methods address conditional probability obliquely.  The binary cursive partitioning breaks observations into groups that are conspicuously distinct based on explanatory-variable values. This often proves a powerful approach to phenomenological heterogeneity.  
 

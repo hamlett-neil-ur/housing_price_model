@@ -84,7 +84,7 @@ The vertical-axis plot limits truncate the values for approximately the ten smal
 
 <img width="650" align="right" src="./Graphics/191212 Hastie-Tibshirani-Friedman M-L Caps and Lims.svg.png" > 
 
-We consider a diverse variety of models. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of each family of methods.  
+We consider a diverse variety of modeling approaches. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of each family of methods.  
 
 For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
 

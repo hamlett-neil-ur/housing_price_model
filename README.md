@@ -21,7 +21,7 @@ Two aspects of this operating model tend to deliver higher profitability than co
 
 The image to the left illustrates the overall *Concept for Operations*.  REITs' purchasers look for listings that are priced below the prevailing market. The spot-market pricing model provides estimates of the "should-cost" price.  When a below-market price is detected, buyers collect other information and apply it to a total-ownership cost model.  This feeds a decision framework as whether to invest.
 
-This work addresses the initial component for the *Spot-Market Pricing Model* component.  The model considers 77  characteristics of each property.   The discussion below elaborates on technical details.  The prototype predictive model for spot-market pricing accounts for approximately 90% of the variation in sales price in the Ames, IA market.  Prices for *outlier* properties — exemplified by large-footprint properties in less-expensive neighborhoods — are estimated with less accuracy.
+This work addresses the initial component for the *Spot-Market Pricing Model* component.  The model considers 77  characteristics of each property.   The discussion below elaborates on technical details.  The prototype predictive model for spot-market pricing demonstrated here accounts for approximately 90% of the variation in sales price in the Ames, IA market.  Prices for *outlier* properties — exemplified by large-footprint properties in less-expensive neighborhoods — are estimated with less accuracy.
 
 
 ## Technical Approach.

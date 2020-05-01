@@ -36,7 +36,7 @@ UR employs CRISP–DM because it contains more-direct coupling to the business c
 ### Business Understanding
 
 
-The figure in the executive summary above summarizes the concept of operations for a hypothetical REIT.  It seeks to find residential properties that are priced below the market by a certain probability threshold.  Then, based on a total ownership cost model, REIT asset purchasers receive recommendations whether to purchase a given property.  The REIT then becomes an absentee landlord.  It rents the property out to qualified tenants.
+The figure in the [executive summary](#executive-summary) above summarizes the concept of operations for a hypothetical REIT.  It seeks to find residential properties that are priced below the market by a certain probability threshold.  Then, based on a total ownership cost model, REIT asset purchasers receive recommendations whether to purchase a given property.  The REIT then becomes an absentee landlord.  It rents the property out to qualified tenants.
 
 Here, we use a prototypical data set from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  An actual solution would obtain real-time updates from a site such as [Bright MLS Homes](https://www.brightmlshomes.com/), or possibly [Zillow](https://www.zillow.com/).  
 
@@ -49,7 +49,7 @@ Finally, an automated decision-making framework would provide REIT asset-portfol
 For each stage in the foregoing purchasing-decision framework, subsequent work will estimate probability distributions for the influential factors.  These are inferred from the data and fit to a distribution (e.g., [[Keelin, 2016]](https://pubsonline.informs.org/doi/10.1287/deca.2016.0338)).  In some cases they might be elicited from experts through a process resembling that described by [[Spetzler, 1975]](https://pubsonline.informs.org/doi/abs/10.1287/mnsc.22.3.340).  The overall framework is designed using a *probabilistic* approach [[Walsh, 2020]](https://hbr.org/2020/02/develop-a-probabilistic-approach-to-managing-uncertainty).  
 
 
-### Data Understanding, Perparation.
+### Data Understanding and Perparation.
 
 Our prototypical data set comes from a [well-known kaggle challenge](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).  The figure below summarizes statistics from the data dictionary, included as an appendix to the end of this report.  We begin with a flat table containing 2,051 records with 83 attributes each. 
 
@@ -57,7 +57,7 @@ Our prototypical data set comes from a [well-known kaggle challenge](https://www
 
 Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We see a small nuber of of records for which many features are missing.  We also see some attributes for which pluralities of records lack values.  
 
-Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. Then we discard observations with null-valued attributes. The data dictionary in the [Appendix](#appendix--data-dictionary) below A more-systematic missing-value-handling procedure awaits subsequent stages of this work.
+Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. Then we discard observations with null-valued attributes. The data dictionary in the [Appendix](#appendix--data-dictionary) below gives describes attribute-by-attribute handling of missing values. A more-systematic missing-value-handling procedure awaits subsequent stages of this work.
 
 The analysis also shows the different attribute categories in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes, here.  The continuous variable `SalePrice` is our response (target) variable.
 
@@ -65,11 +65,11 @@ The analysis also shows the different attribute categories in the data. We have 
 
 The dimensionality of our explantory-variable space is considerable.  We suffer from the risk of the *curse of dimensionality* [[Hastie, *et al*, 2009, §2.5]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This becomes particularly acute considering our the number of categorical attributes.  When we *dummify* the these variables — e.g., [[pandas.get_dummies()]](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.get_dummies.html) — the attribute dimensionality becomes multiples greater.  
 
-We seek therefore to pare the attribute space. We pair-wise analyze each explanatory variable's relationship with the target variable `SalesPrice`.  This is accomplished via two methods. We consider the pair-wise correlations for continuous and discrete variables. The heat-map graphic to the right illustrates for continuous variables.  We retain continuous and discrete explanatory variables whose correlation with the response variable exceeds 0.45.  This gives us six continous and five discrete variables.
+We seek therefore to pare the attribute space. We pair-wise analyze each explanatory variable's relationship with the target variable `SalesPrice`.  This is accomplished via two methods. We consider the pair-wise correlations for continuous and discrete variables. The heat-map graphic to the right illustrates for continuous variables.  We retain continuous and discrete explanatory variables whose correlation with the response variable exceeds 0.45.  This gives us six continous and five discrete *influential* variables.
 
-Our degree-of-influence analysis for categorical variables is somewhat less-direct. We assume that if a categorical variable is a good predictor of a continuous response variable, then the converse should also be true.  So, we construct univariate multinomial logistic-regression models for each categorical variable. We use our `SalesPrice` response variable as the explanatory variable for each such model. We retain categorical variables for which `SalesPrice` predicts their class with accuracy exceeding 0.55. This leaves us with 33 influential categorical variables. After dummifying, we end up with 177 explanatory variables, overall.
+Our degree-of-influence analysis for categorical variables is somewhat less-direct. We assume that if a categorical variable is a good predictor of a continuous response variable, then the converse should also be true.  So, we construct univariate multinomial logistic-regression models for each categorical variable. We use our `SalesPrice` response variable as the explanatory variable for each such model. We retain categorical variables for which `SalesPrice` predicts their class with accuracy exceeding 0.55. This leaves us with 33 *influential* categorical variables. After dummifying, we end up with 177 explanatory variables, overall.
 
-Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This provides multiple pieces of useful information.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of pronounced multicollinearity.   In general, knowing the effective dimensions explanatory-variable is very useful.
+Finally, as is always recommended in high-dimensional scenarios, we perform dimensionality analysis of our explanatory-variable set. This provides at least two pieces of useful information.  First, multicollinearity presents difficulties for regression models, in particular (e.g., [[Dielman, 2005, §4.6]](https://amzn.to/2yycLN2), [[Fox, 2008, chap 13]](https://amzn.to/2zhcYot), [[Olive, 2017, §3.8]](https://www.springer.com/us/book/9783319552507)).  Regression models can become unstable in the presence of pronounced multicollinearity.   In general, knowing the effective dimensions explanatory-variable is very useful.
 
 <img width="500" align="left" src="./Graphics/Dummified-Explanatory Sing-Value Spectrum.png" > 
 
@@ -78,7 +78,7 @@ The figure to the left depicts results from dimensionality analysis of our 177 e
 
 We find that our 177 explanatory variables are highly dimensionally-dominated. Most of the variance is contained in the first ten or so dimensions. In fact, only four dimensions contain 99% of the overall variance. Theoretically, we should be able to reduce our explanatory-variable dimensionality to just a handfull of dimensions and get the same result, give or take a percent or so, as with using all of them.  We do not attempt this here, however.  
 
-The vertical-axis plot limits truncate the values for approximately the ten smallest singular values. These have quantities on the order of <img src="https://render.githubusercontent.com/render/math?math=\sim10^{-10}">. The *hat matrix* — <img src="https://render.githubusercontent.com/render/math?math=\big(\boldsymbol{X}^T\boldsymbol{X}\big)^{-1}\boldsymbol{X}^T"> — for a regression model would be poorly-conditioned  (practically singular) in this case. Instability in coefficient values might consequently degrade our ability to intrepret the relative importance of explanatory variables.
+The vertical-axis plot limits truncate the values for approximately the ten smallest singular values. These have quantities on the order of <img src="https://render.githubusercontent.com/render/math?math=\sim10^{-10}">. The *hat matrix* — <img src="https://render.githubusercontent.com/render/math?math=\big(\boldsymbol{X}^T\boldsymbol{X}\big)^{-1}\boldsymbol{X}^T"> — for a regression model would be poorly-conditioned  (practically singular) in this case. Instability in coefficient values might as a result degrade our ability to intrepret the relative importance of explanatory variables [[Cooley, 1971]](https://amzn.to/2xma6WC).
 
 ### Modeling.
 
@@ -86,7 +86,7 @@ The vertical-axis plot limits truncate the values for approximately the ten smal
 
 We consider a diverse variety of modeling approaches. The figure to the right extends an important summary from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). This table groups the family of mainstream statistical-learning methods into five broad categories. The column headers represent the most-general form of each family of methods.  
 
-For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS.
+For example, *Multi-Attribute Regression Splines* (MARS) represents the most-general form of regression modeling, according to this perspective. Ordinary Least-Squares (OLS) regression is arguably a special case of MARS. This class also contains [Generalized Additive Models](https://en.wikipedia.org/wiki/Generalized_additive_model) (GAMs) [[Hastie, 1990]](https://amzn.to/3aRkbbJ), which bear considerable resemblance to artificial neural networks using [rectifier linear unit](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/) (RELU) operators as activation functions.
 
 The rows in the table contain points of view on the strengths and weaknesses associated with each of the methods. The original [[Hastie, *et al*, 2009, Table 10.1]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) considers nine such factors. The version here has been extended to add three more. This work assigns priemium to predictive power, resistence to overfitting, and conditional probability. 
 

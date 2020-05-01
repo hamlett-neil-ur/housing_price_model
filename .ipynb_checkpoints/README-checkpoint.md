@@ -55,11 +55,11 @@ Our prototypical data set comes from a [well-known kaggle challenge](https://www
 
 <img width="1000" align="center" src="./Graphics/DataDictSummy.png" > 
 
-Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We see a small nuber of of records for which many features are missing.  We also see some attributes for which pluralities of records lack values.  
+Most-significantly, we begin with numerous incomplete records. Our data-completeness analysis looks across both observation and attribute dimensions.  We see a small number of of records for which many features are missing.  We also see some attributes for which pluralities of records lack values.  
 
-Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. Then we discard observations with null-valued attributes. The data dictionary in the [Appendix](#appendix--data-dictionary) below gives describes attribute-by-attribute handling of missing values. A more-systematic missing-value-handling procedure awaits subsequent stages of this work.
+Our missing-value handling for this exploratory stage is simple.  We discard the attributes for which large proportions of values are missing. Then we discard observations with null-valued attributes. The data dictionary in the [Appendix](#appendix--data-dictionary) below describes attribute-by-attribute our handling of missing values. A more-systematic missing-value-handling procedure awaits subsequent stages of this work.
 
-The analysis also shows the different attribute categories in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish for our purposes, here.  The continuous variable `SalePrice` is our response (target) variable.
+The analysis also shows the different attribute categories in the data. We have continuous, discrete, and categorical attributes. The discrete attributes are either numeric measurements recorded at integer granularity, or ordinal variables. We do not distinguish between them here.  The continuous variable `SalePrice` is our response (target) variable.
 
 <img width="350" align="right" src="./Graphics/Continuous Explanatories Correlation Heatmap.png" > 
 

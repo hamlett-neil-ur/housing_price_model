@@ -133,11 +133,17 @@ Tree-based methods get around this by allowing for distinct partitions.  Our res
 
 For each model approach approach we employ the [sklearn](https://scikit-learn.org/stable/) [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) package to perform a search over a judiciously-selected hyperparameter space. For each hyper-parameter gridpoint we calculate five-fold cross-validation. The table in the [Model Evaluation](https://github.com/hamlett-neil-ur/housing_price_model#model-evaluation) section below lists the hyperprameters searched, as well as the values for the best models.
 
-Also, we apply a logarithmic transform to the response variable.  This can have the affect of supressing outliers. In our case, the performance with the logarithmic transform is marginally better than previous iterations without.  This moreover had the affect of reducing overfitting.  The downside of such transforms is that additional caution is involved in evaluating some model metrics.
+<img width="750" align="left" src="./Graphics/respnse-variable KDE.png" > 
 
-<img width="750" align="left" src="./Graphics/EdwardsConundrum.png" > 
+Also, we apply a logarithmic transform to the response variable.  The figure to the left illustrates our motivation.  It contains [Kernel-Density Estimates](https://en.wikipedia.org/wiki/Kernel_density_estimation) for both the directly-observed and the logarithmically-transformed response-variable `SalePrice`. Each subplot is also labeled with its [skew coefficient](https://en.wikipedia.org/wiki/Skewness) γ. 
 
-Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeared to be driven by outliers. The figure to the left illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.
+Two aspects of our distributions are significant.  First, the log transformation substantially reduces the skewness of the data. Secondly, it dramatically supresses the long upper tail in the `SalePrice`.  Neither distribution passes statistical tests for normality. The log-transformed version is appears however subsantially closer to being Gaussian, a key assumption of linear models.
+
+This can have the affect of supressing outliers. In our case, the performance with the logarithmic transform is marginally better than previous iterations without.  This moreover had the affect of reducing overfitting.  The downside of such transforms is that additional caution is involved in evaluating some model metrics.
+
+<img width="750" align="right" src="./Graphics/EdwardsConundrum.png" > 
+
+Some additional manual effort was applied to the linear-regression model.  Specifically, the model performance for that approach appeared to be driven by outliers. The figure to the right illustrates. Two particular observations appeared as conspiuous outliers from the rest, in terms of price and living space. These were in the Edwards neighborhood, for which the price distribution does not coincide with that of the overall market. Effort was applied to identify explanatory-variable attributes that drove the outlier estimates.
 
 
 ### Model Evaluation.

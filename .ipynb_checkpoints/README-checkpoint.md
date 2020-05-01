@@ -139,7 +139,7 @@ Also, we apply a logarithmic transform to the response variable.  The figure to 
 
 Two aspects of our distributions are significant.  First, the log transformation substantially reduces the skewness of the data. Secondly, it dramatically supresses the long upper tail in the `SalePrice`.  Neither distribution passes statistical tests for normality. The log-transformed version is appears however subsantially closer to being Gaussian, a key assumption of linear models.
 
-This can have the affect of supressing outliers. In our case, the performance with the logarithmic transform is marginally better than previous iterations without.  This moreover had the affect of reducing overfitting.  The downside of such transforms is that additional caution is involved in evaluating some model metrics.
+Most significantly, this transformation suppresses outliers. In our case, the performance with the logarithmic transform is marginally better than previous iterations without.  This moreover reduces overfitting.  The downside of such transforms is that additional caution is involved in evaluating some statistical-inference metrics.
 
 <img width="750" align="right" src="./Graphics/EdwardsConundrum.png" > 
 
@@ -152,14 +152,16 @@ The table below contains summary statistics for the best model from each approac
 
 Now, model-overfitting is the bain of any statistical modeler's existence. We look for results in which model scores for the training and test data sets are similar.  If, as often occurs, the model scores for the training data are higher than for test data, overfitting may have occurred. Alternatively, such disparities may represent evidence of heterogeniety in the data.
 
-Two tree-based ensemble methods are highlighted in the table.  These achieved the best performance on the test data.  In particular, the *random-forest regressor* provided the best <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.870 against the training data.  The performance of the *bagging-tree regressor* was approximately equivalent.
+Two tree-based ensemble methods are highlighted in the table.  These achieved the best performance on the test data.  In particular, the *random-forest regressor* provided the best [*Coefficient of Determination*](https://en.wikipedia.org/wiki/Coefficient_of_determination) <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics. This achieved an <img src="https://render.githubusercontent.com/render/math?math=R^2"> of 0.870 against the training data.  The performance of the *bagging-tree regressor* was approximately equivalent.
 
 Both methods appear to have yielded near-optimum fits.  The <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores anfor the training and test data coincide very closely. The other ensemble method, the *ada-boosted tree regressor* provides performance that is not far behind.  None of these methods leads to significant overfitting. These methods appear to have *smoothed* out the variance. That is the motivation for ensemble methods.  
 
 
 <img width="1000" align="center" src="./Graphics/200426 Model ANOVAs.png" > 
 
-Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  Results from the latter two are less-strong.
+The linear- (Ridge) regression model also performed well. Its <img src="https://render.githubusercontent.com/render/math?math=R^2"> score for training data actually exceeds that for the tree-based ensemble methods. Overfitting is however evidenced by a lower <img src="https://render.githubusercontent.com/render/math?math=R^2"> for the test data.  A more-optimally-fit model would probably produce balanced <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores similar to those for our tree methods.
+
+Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) in the [Modeling](https://github.com/hamlett-neil-ur/housing_price_model#modeling) introductory section above leads us to expect good results from Tree-based methods.  It also leads to expect strong from the ANN and the kNN models, also.  Results from the latter two are less-strong.  The ANN is particularly surprising.  This merits further investigation.
 
 #### What do we believe is happening? 
 
@@ -167,21 +169,20 @@ Now, the table from [[Hastie, *et al*, 2009, Table 10.1, p. 351]](https://web.st
 
 The figures to the left contain the residual and response plots for test and training estimates produced by the bagging-tree regressor. [[Olive, 2017]](https://www.springer.com/us/book/9783319552507) recommends this visualization.  The plots also contain [Locally-Weighted Scatterplot Smoothing](https://www.epa.gov/sites/production/files/2016-07/documents/loess-lowess.pdf) (LOWESS) curves, also recommended in [[Olive, 2017]](https://www.springer.com/us/book/9783319552507).
 
-First, the LOWESS curves do not perfectly coincide with the red-colored <img src="https://render.githubusercontent.com/render/math?math=y_i=\hat{y_i}"> or the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curves. This tells us that the model fails to capture some of the structure in the data. It contains some bias.
+First, the LOWESS curves do not perfectly coincide with the red-colored <img src="https://render.githubusercontent.com/render/math?math=y_i=\hat{y_i}"> or the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curves. This tells us that the model fails to capture some of the structure in the data. It contains some bias. That our <img src="https://render.githubusercontent.com/render/math?math=R^2"> statistics for test and training are similar, our model appropriately handles the variance.
 
-Specifically, our model *underestimates* the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
+Secondly, our model *underestimates* the price of more-expensive properties.  Now, square-foot living space is an often-used basis for estimating house price. It is well-known among realtors however that price per square foot falls off for larger properties. Perhaps subsequent analysis will reveal that square footage is accorded too much influence.
 
 <img width="750" align="left" src="./Graphics/Resp_resid_train_test.png" > 
 
 Second, the some outliers are occurring.  These are evident when for example <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve. These instances appear to drive our coefficient of determination <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores. 
 
-Now, our second set of response and residual plots depict results for the linear-regression model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
+Now, our second set of response and residual plots depict results for the linear-regression (Ridge) model.  This is the default, against which we often compare other results. This model only performs marginally worse. Its outliers — <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i"> points are significantly off of the <img src="https://render.githubusercontent.com/render/math?math=\epsilon_i=0"> curve — appear however to be marginally more acute. 
 
-Our ensemble tree-based models do perform considerably better.  This cursorily seems to support our hypothesis that the tree models handle conditional-probabilities — manifested here as outliers — a little bit better. Moreover, ensembling smooths out variance, which apparently mitigates overfitting. Further analysis is needed.
+Our ensemble tree-based models do perform marginally better.  The smoothing out of variance through ensembling is evident. This is the motivation for ensembling. That the <img src="https://render.githubusercontent.com/render/math?math=R^2"> scores for the ridge model are so close to the tree models seems to indicate that conditional probability is not a substantial driver for this data. The ranges of the bagging-tree and ridge-regressor residual plots, do suggest that the former handles outliers more-effectively.
 
-Finally, many of our models consistently perform better against training data than against test data.    Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) to ascertain whether this occurs.  
+Finally, many of our models consistently perform better against training data than against test data.    Additional analysis is needed to understand other cases.  To the extent that the sufficient statistics (e.g., [[Cox, 1974]](https://amzn.to/34QsMKx)) for the training data are distinct from test data, model-score differences are attributable to heterogeneity.  We could compare the two data sets attribute-by-attribute using statistical tests such as the [Kolmogorov-Smirnov test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test) to ascertain whether this occurs.  That ensembling produces balance between training and test data subsets seems to indicate that heterogeneity is not a substantial problem.
 
-If not, our models are overfit. Overfit models capture the structure of idiosyncratic noise in the training data.  This adversely affects performance for previously-unseen data, including test data.  More-careful tuning gets us the best scenario, where scores for training and test data coincide almost exactly.
 
 ## Further directions.  
 
